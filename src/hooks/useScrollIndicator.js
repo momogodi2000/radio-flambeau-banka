@@ -23,3 +23,4 @@ const useScrollIndicator = () => {
 };
 
 export { useScrollIndicator };
+export default useScrollIndicator;

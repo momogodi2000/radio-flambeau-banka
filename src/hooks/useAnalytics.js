@@ -43,3 +43,4 @@ const useAnalytics = () => {
 };
 
 export { useAnalytics };
+export default useAnalytics;
