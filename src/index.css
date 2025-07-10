@@ -61,7 +61,9 @@ input:focus, textarea:focus, select:focus {
 /* Styles personnalisés */
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r bg-clip-text text-transparent;
+    --tw-gradient-from: #2563eb;
+    --tw-gradient-to: #7c3aed;
   }
   
   .gradient-bg {
@@ -69,7 +71,9 @@ input:focus, textarea:focus, select:focus {
   }
   
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-2 px-6 rounded-full hover:shadow-lg transition-all duration-300;
+    @apply bg-gradient-to-r text-white font-semibold py-2 px-6 rounded-full hover:shadow-lg transition-all duration-300;
+    --tw-gradient-from: #3b82f6;
+    --tw-gradient-to: #a21caf;
   }
   
   .btn-secondary {
@@ -185,7 +189,9 @@ input:focus, textarea:focus, select:focus {
 }
 
 .audio-progress-bar {
-  @apply bg-gradient-to-r from-blue-500 to-purple-600 h-full rounded-full transition-all duration-300;
+  @apply bg-gradient-to-r h-full rounded-full transition-all duration-300;
+  --tw-gradient-from: #3b82f6;
+  --tw-gradient-to: #a21caf;
 }
 
 /* Styles pour les formulaires */

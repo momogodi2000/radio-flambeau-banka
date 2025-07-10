@@ -48,7 +48,7 @@ const Hero = ({ onPlayClick, isPlaying }) => {
       
       <section id="accueil" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Arrière-plan avec gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600"></div>
+        <div className="absolute inset-0 bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777]"></div>
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-purple-600/80 to-pink-600/80"></div>

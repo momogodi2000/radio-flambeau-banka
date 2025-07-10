@@ -1,28 +1,34 @@
-
-// vitest.config.js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
-  plugins: [react({
-    // This is needed for hot module replacement
-    fastRefresh: true,
-  })],
-  server: {
-    port: 3000,
-    open: true,
-    hmr: {
-      overlay: false
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    watch: {
-      usePolling: true
-    }
   },
   build: {
     outDir: 'dist',
-    minify: true
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'router': ['react-router-dom'],
+          'ui': ['framer-motion', 'react-icons'],
+          'audio': ['react-player'],
+        }
+      }
+    }
   },
-  css: {
-    postcss: './postcss.config.js'
+  server: {
+    port: 3000,
+    open: true,
+    host: true
+  },
+  preview: {
+    port: 5000
   }
-});
+})

@@ -38,7 +38,7 @@ const Team = () => {
       hobbies: ['Football', 'Lecture', 'Voyage'],
       quote: 'La radio est un pont entre les cœurs, peu importe la distance.',
       image: '/images/team/jean-paul.jpg',
-      gradient: 'from-blue-500 to-indigo-600',
+      gradient: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]',
       social: {
         facebook: 'https://facebook.com/jeanpaul.mbarga',
         twitter: 'https://twitter.com/jpmbargaradio',
@@ -62,7 +62,7 @@ const Team = () => {
       hobbies: ['Photographie', 'Cuisine', 'Théâtre'],
       quote: 'Informer avec vérité, c\'est servir la démocratie.',
       image: '/images/team/marie.jpg',
-      gradient: 'from-purple-500 to-pink-600',
+      gradient: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]',
       social: {
         facebook: 'https://facebook.com/marie.ondoa',
         instagram: 'https://instagram.com/marie_ondoa_radio',
@@ -86,7 +86,7 @@ const Team = () => {
       hobbies: ['Musique', 'Technologie', 'Randonnée'],
       quote: 'La qualité audio parfaite, c\'est l\'âme de la radio.',
       image: '/images/team/paul.jpg',
-      gradient: 'from-green-500 to-emerald-600',
+      gradient: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]',
       social: {
         facebook: 'https://facebook.com/paul.essomba',
         email: 'paul@radioflambeaubanka.com'
@@ -109,7 +109,7 @@ const Team = () => {
       hobbies: ['Danse', 'Littérature', 'Bénévolat'],
       quote: 'Éduquer et inspirer, c\'est transformer l\'avenir.',
       image: '/images/team/celestine.jpg',
-      gradient: 'from-orange-500 to-red-600',
+      gradient: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]',
       social: {
         facebook: 'https://facebook.com/celestine.atangana',
         instagram: 'https://instagram.com/celestine_radio',
@@ -133,7 +133,7 @@ const Team = () => {
       hobbies: ['Voyage', 'Agriculture', 'Sport'],
       quote: 'Sur le terrain, la vérité prend vie.',
       image: '/images/team/robert.jpg',
-      gradient: 'from-teal-500 to-blue-600',
+      gradient: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]',
       social: {
         facebook: 'https://facebook.com/robert.mfou',
         email: 'robert@radioflambeaubanka.com'
@@ -156,7 +156,7 @@ const Team = () => {
       hobbies: ['Engagement social', 'Arts', 'Éducation'],
       quote: 'Ensemble, nous faisons la différence.',
       image: '/images/team/benevoles.jpg',
-      gradient: 'from-indigo-500 to-purple-600',
+      gradient: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]',
       social: {
         facebook: 'https://facebook.com/radioflambeaubanka',
         instagram: 'https://instagram.com/radioflambeaubanka',
@@ -190,7 +190,7 @@ const Team = () => {
       
       <div className="min-h-screen bg-gray-50" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20">
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div

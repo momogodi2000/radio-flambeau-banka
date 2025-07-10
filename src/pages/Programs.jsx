@@ -36,7 +36,7 @@ const Programs = () => {
       days: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'],
       description: 'Commencez votre journée avec les dernières actualités, la météo et une sélection musicale énergisante.',
       image: '/images/programs/reveil-matinal.jpg',
-      color: 'from-orange-500 to-red-600',
+      color: '[--tw-gradient-from:#f59e42] [--tw-gradient-to:#ef4444]',
       duration: '3h',
       type: 'live'
     },
@@ -49,7 +49,7 @@ const Programs = () => {
       days: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
       description: 'L\'actualité locale, nationale et internationale présentée par notre équipe de journalistes.',
       image: '/images/programs/journal.jpg',
-      color: 'from-blue-500 to-indigo-600',
+      color: '[--tw-gradient-from:#2563eb] [--tw-gradient-to:#9333ea]',
       duration: '1h',
       type: 'live'
     },
@@ -62,7 +62,7 @@ const Programs = () => {
       days: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
       description: 'Un voyage musical à travers l\'Afrique avec les meilleurs hits et découvertes.',
       image: '/images/programs/varietes.jpg',
-      color: 'from-green-500 to-emerald-600',
+      color: '[--tw-gradient-from:#10b981] [--tw-gradient-to:#34d399]',
       duration: '2h',
       type: 'live'
     },
@@ -75,7 +75,7 @@ const Programs = () => {
       days: ['lundi', 'mercredi', 'vendredi'],
       description: 'Discussions ouvertes sur les enjeux sociétaux avec la participation des auditeurs.',
       image: '/images/programs/debat.jpg',
-      color: 'from-purple-500 to-pink-600',
+      color: '[--tw-gradient-from:#9333ea] [--tw-gradient-to:#db2777]',
       duration: '1h',
       type: 'live'
     },
@@ -88,7 +88,7 @@ const Programs = () => {
       days: ['dimanche'],
       description: 'Portraits de femmes inspirantes qui transforment leur communauté.',
       image: '/images/programs/femmes.jpg',
-      color: 'from-pink-500 to-rose-600',
+      color: '[--tw-gradient-from:#ef4444] [--tw-gradient-to:#f97316]',
       duration: '1h',
       type: 'live'
     },
@@ -101,7 +101,7 @@ const Programs = () => {
       days: ['samedi'],
       description: 'Programmes éducatifs pour accompagner les jeunes dans leur formation.',
       image: '/images/programs/education.jpg',
-      color: 'from-blue-500 to-cyan-600',
+      color: '[--tw-gradient-from:#2563eb] [--tw-gradient-to:#9333ea]',
       duration: '1h',
       type: 'live'
     },
@@ -114,7 +114,7 @@ const Programs = () => {
       days: ['samedi'],
       description: 'Découverte des traditions et de la richesse culturelle camerounaise.',
       image: '/images/programs/culture.jpg',
-      color: 'from-amber-500 to-orange-600',
+      color: '[--tw-gradient-from:#f59e00] [--tw-gradient-to:#d97706]',
       duration: '1h',
       type: 'live'
     },
@@ -127,7 +127,7 @@ const Programs = () => {
       days: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
       description: 'Vos messages d\'amour et dédicaces musicales pour vos proches.',
       image: '/images/programs/dedicaces.jpg',
-      color: 'from-red-500 to-pink-600',
+      color: '[--tw-gradient-from:#ef4444] [--tw-gradient-to:#f97316]',
       duration: '2h',
       type: 'live'
     },
@@ -140,7 +140,7 @@ const Programs = () => {
       days: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
       description: 'Musiques douces et mélodies apaisantes pour accompagner vos nuits.',
       image: '/images/programs/nuit.jpg',
-      color: 'from-indigo-500 to-blue-600',
+      color: '[--tw-gradient-from:#2563eb] [--tw-gradient-to:#9333ea]',
       duration: '8h',
       type: 'auto'
     }
@@ -170,7 +170,7 @@ const Programs = () => {
       
       <div className="min-h-screen bg-gray-50" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20">
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div

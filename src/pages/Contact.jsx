@@ -46,28 +46,28 @@ const Contact = () => {
       title: 'Adresse',
       content: 'Banka, Région du Centre, Cameroun',
       description: 'Visitez nos studios au cœur de Banka',
-      color: 'from-blue-500 to-indigo-600'
+      color: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#a21caf]'
     },
     {
       icon: Phone,
       title: 'Téléphone',
       content: '+237 6XX XXX XXX',
       description: 'Appelez-nous du lundi au vendredi',
-      color: 'from-green-500 to-emerald-600'
+      color: '[--tw-gradient-from:#10b981] [--tw-gradient-to:#34d399]'
     },
     {
       icon: Mail,
       title: 'Email',
       content: 'contact@radioflambeaubanka.com',
       description: 'Écrivez-nous à tout moment',
-      color: 'from-purple-500 to-pink-600'
+      color: '[--tw-gradient-from:#9333ea] [--tw-gradient-to:#db2777]'
     },
     {
       icon: Clock,
       title: 'Horaires',
       content: '24h/24 - 7j/7',
       description: 'Diffusion continue',
-      color: 'from-orange-500 to-red-600'
+      color: '[--tw-gradient-from:#f59e0b] [--tw-gradient-to:#d97706]'
     }
   ];
   
@@ -107,21 +107,21 @@ const Contact = () => {
       icon: Heart,
       title: 'Envoyer une dédicace',
       description: 'Partagez un message d\'amour avec vos proches',
-      color: 'from-pink-500 to-rose-600',
+      color: '[--tw-gradient-from:#f472b6] [--tw-gradient-to:#ec4899]',
       action: () => openForm('dedicaces')
     },
     {
       icon: Mail,
       title: 'Newsletter',
       description: 'Restez informé de nos actualités',
-      color: 'from-blue-500 to-purple-600',
+      color: '[--tw-gradient-from:#3b82f6] [--tw-gradient-to:#a21caf]',
       action: () => openForm('newsletter')
     },
     {
       icon: MessageCircle,
       title: 'Feedback',
       description: 'Donnez votre avis sur nos programmes',
-      color: 'from-green-500 to-emerald-600',
+      color: '[--tw-gradient-from:#10b981] [--tw-gradient-to:#34d399]',
       action: () => openForm('feedback')
     }
   ];
@@ -191,7 +191,7 @@ const Contact = () => {
       
       <div className="min-h-screen bg-gray-50" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20">
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div

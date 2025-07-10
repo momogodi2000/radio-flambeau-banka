@@ -131,7 +131,7 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent mb-4 [--tw-gradient-from:#2563eb] [--tw-gradient-to:#7c3aed]">
             Contactez-nous
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -161,7 +161,7 @@ const Contact = () => {
                     transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                     className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <div className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-full flex items-center justify-center`}>
+                    <div className={`w-12 h-12 bg-gradient-to-r rounded-full flex items-center justify-center [--tw-gradient-from:#3b82f6] [--tw-gradient-to:#2563eb]`}>
                       <info.icon size={24} className="text-white" />
                     </div>
                     <div>

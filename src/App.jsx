@@ -148,7 +148,7 @@ const App = () => {
   
   // Composant de chargement
   const LoadingScreen = () => (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] flex items-center justify-center z-50">
       <div className="text-center text-white">
         <div className="w-24 h-24 mx-auto mb-6 relative">
           <div className="absolute inset-0 rounded-full border-4 border-white/20"></div>
