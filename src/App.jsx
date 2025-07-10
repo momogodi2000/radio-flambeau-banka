@@ -1,255 +1,434 @@
-// src/App.jsx
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// src/App.jsx - Updated with enhanced routing and PWA features
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Composants
+// Context Providers
+import { AudioProvider } from './context/AudioContext';
+import { AppProvider } from './context/AppContext';
+import { PWAProvider } from './context/PWAContext';
+
+// Core Components
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import AudioPlayer from './components/AudioPlayer/AudioPlayer';
-import ScrollIndicator from './components/Common/ScrollIndicator';
+import LoadingSpinner from './components/Common/LoadingSpinner';
+import ErrorBoundary from './components/Common/ErrorBoundary';
+import OfflineIndicator from './components/Common/OfflineIndicator';
+import PWAInstallPrompt from './components/PWA/PWAInstallPrompt';
+import UpdateAvailable from './components/PWA/UpdateAvailable';
 
-// Sections
-import Hero from './components/Sections/Hero';
-import About from './components/Sections/About';
-import Programs from './components/Sections/Programs';
-import Team from './components/Sections/Team';
-import News from './components/Sections/News';
-import Contact from './components/Sections/Contact';
+// Lazy-loaded pages for better performance
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Programs = lazy(() => import('./pages/Programs'));
+const Team = lazy(() => import('./pages/Team'));
+const News = lazy(() => import('./pages/News'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Partners = lazy(() => import('./pages/Partners'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Offline = lazy(() => import('./pages/Offline'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Pages
-import Home from './pages/Home';
-import AboutPage from './pages/About';
-import ProgramsPage from './pages/Programs';
-import TeamPage from './pages/Team';
-import NewsPage from './pages/News';
-import ContactPage from './pages/Contact';
-
-// Hooks
-import useAudioPlayer from './hooks/useAudioPlayer';
-import useScrollIndicator from './hooks/useScrollIndicator';
-import useAnalytics from './hooks/useAnalytics';
-
-// Styles
-import './styles/globals.css';
-
-// Enregistrer les plugins GSAP
-gsap.registerPlugin(ScrollTrigger);
-
-const App = () => {
-  const [stickyPlayerVisible, setStickyPlayerVisible] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  
-  // Hooks personnalisés
-  const { 
-    isPlaying, 
-    currentTrack, 
-    listenersCount, 
-    togglePlayPause, 
-    volume, 
-    setVolume 
-  } = useAudioPlayer();
-  
-  const { scrollProgress } = useScrollIndicator();
-  const { trackPageView, trackEvent } = useAnalytics();
-  
-  // Effet de chargement initial
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    
-    return () => clearTimeout(timer);
-  }, []);
-  
-  // Gestion du sticky player
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const shouldShow = scrollY > 300 && isPlaying;
-      
-      if (shouldShow !== stickyPlayerVisible) {
-        setStickyPlayerVisible(shouldShow);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isPlaying, stickyPlayerVisible]);
-  
-  // Animations GSAP
-  useEffect(() => {
-    // Animation des cartes au scroll
-    gsap.fromTo('.card-hover', 
-      { 
-        y: 50, 
-        opacity: 0 
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: '.card-hover',
-          start: 'top 80%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
-    
-    // Animation des sections
-    gsap.fromTo('.section-fade-in', 
-      { 
-        opacity: 0, 
-        y: 30 
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: '.section-fade-in',
-          start: 'top 70%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
-    
-    // Cleanup des animations
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
-  
-  // Gestion de la fermeture du menu mobile
-  const handleMobileMenuClose = () => {
-    setMobileMenuOpen(false);
-  };
-  
-  // Gestion de la fermeture du sticky player
-  const handleStickyPlayerClose = () => {
-    setStickyPlayerVisible(false);
-    togglePlayPause(); // Arrêter la lecture
-  };
-  
-  // Tracking des événements
-  const handlePlayButtonClick = () => {
-    trackEvent('play_radio', 'Audio', 'Radio Stream');
-    togglePlayPause();
-  };
-  
-  // Composant de chargement
-  const LoadingScreen = () => (
-    <div className="fixed inset-0 bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] flex items-center justify-center z-50">
-      <div className="text-center text-white">
-        <div className="w-24 h-24 mx-auto mb-6 relative">
-          <div className="absolute inset-0 rounded-full border-4 border-white/20"></div>
-          <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-3xl">📻</span>
-          </div>
-        </div>
-        <h2 className="text-2xl font-bold mb-2">Radio Flambeau-Banka</h2>
-        <p className="text-white/80">Chargement en cours...</p>
-      </div>
+// Global Loading Component
+const GlobalLoader = () => (
+  <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
+    <div className="text-center">
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mb-8"
+      >
+        <img 
+          src="/images/logo.png" 
+          alt="Radio Flambeau-Banka" 
+          className="w-24 h-24 mx-auto mb-4"
+        />
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Radio Flambeau-Banka</h2>
+        <p className="text-gray-600">Chargement en cours...</p>
+      </motion.div>
+      <LoadingSpinner size="large" />
     </div>
-  );
-  
-  // Page d'accueil par défaut
-  const HomePage = () => (
-    <main className="min-h-screen">
-      <Hero onPlayClick={handlePlayButtonClick} />
-      <About />
-      <Programs />
-      <Team />
-      <News />
-      <Contact />
-    </main>
-  );
-  
-  if (loading) {
-    return <LoadingScreen />;
-  }
-  
+  </div>
+);
+
+// Page transition variants
+const pageVariants = {
+  initial: { opacity: 0, y: 20 },
+  in: { opacity: 1, y: 0 },
+  out: { opacity: 0, y: -20 }
+};
+
+const pageTransition = {
+  type: 'tween',
+  ease: 'anticipate',
+  duration: 0.4
+};
+
+// Enhanced Route Component with analytics
+const AnalyticsRoute = ({ children }) => {
+  useEffect(() => {
+    // Track page view
+    if (typeof gtag !== 'undefined') {
+      gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID, {
+        page_path: window.location.pathname,
+      });
+    }
+  }, []);
+
+  return children;
+};
+
+function App() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [swUpdate, setSWUpdate] = useState(null);
+
+  // Monitor online/offline status
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // Service Worker registration and update handling
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      const registerSW = async () => {
+        try {
+          const registration = await navigator.serviceWorker.register('/sw.js', {
+            scope: '/'
+          });
+
+          console.log('Service Worker registered successfully:', registration);
+
+          // Check for updates
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                setSWUpdate(registration);
+              }
+            });
+          });
+
+          // Listen for messages from service worker
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data.type === 'UPDATE_AVAILABLE') {
+              setSWUpdate(registration);
+            }
+          });
+
+        } catch (error) {
+          console.error('Service Worker registration failed:', error);
+        }
+      };
+
+      registerSW();
+    }
+  }, []);
+
+  // Handle service worker update
+  const handleSWUpdate = () => {
+    if (swUpdate && swUpdate.waiting) {
+      swUpdate.waiting.postMessage({ type: 'SKIP_WAITING' });
+      window.location.reload();
+    }
+  };
+
+  // Enhanced error reporting
+  useEffect(() => {
+    const handleError = (event) => {
+      console.error('Global error:', event.error);
+      // You could send this to an error reporting service
+    };
+
+    const handleUnhandledRejection = (event) => {
+      console.error('Unhandled promise rejection:', event.reason);
+      // You could send this to an error reporting service
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
+  }, []);
+
+  // Preload critical resources
+  useEffect(() => {
+    const preloadResources = () => {
+      // Preload critical images
+      const criticalImages = [
+        '/images/hero-bg.jpg',
+        '/images/logo.png'
+      ];
+
+      criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+      });
+
+      // Preload critical CSS if not already loaded
+      if (!document.querySelector('link[href*="app.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'style';
+        link.href = '/css/app.css';
+        document.head.appendChild(link);
+      }
+    };
+
+    preloadResources();
+  }, []);
+
   return (
     <HelmetProvider>
-      <Router>
-        <div className="App font-poppins">
-          {/* Indicateur de défilement */}
-          <ScrollIndicator progress={scrollProgress} />
-          
-          {/* Header */}
-          <Header 
-            mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
-            onPlayClick={handlePlayButtonClick}
-            isPlaying={isPlaying}
-          />
-          
-          {/* Contenu principal */}
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/programs" element={<ProgramsPage />} />
-            <Route path="/team" element={<TeamPage />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-          
-          {/* Footer */}
-          <Footer />
-          
-          {/* Lecteur audio sticky */}
-          {stickyPlayerVisible && (
-            <AudioPlayer
-              isSticky={true}
-              onClose={handleStickyPlayerClose}
-              isPlaying={isPlaying}
-              currentTrack={currentTrack}
-              listenersCount={listenersCount}
-              volume={volume}
-              setVolume={setVolume}
-              onTogglePlay={handlePlayButtonClick}
-            />
-          )}
-          
-          {/* Notifications */}
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#1f2937',
-                color: '#fff',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-              },
-              success: {
-                iconTheme: {
-                  primary: '#10b981',
-                  secondary: '#fff',
-                },
-              },
-              error: {
-                iconTheme: {
-                  primary: '#ef4444',
-                  secondary: '#fff',
-                },
-              },
-            }}
-          />
-        </div>
-      </Router>
+      <ErrorBoundary>
+        <PWAProvider>
+          <AppProvider>
+            <AudioProvider>
+              <Router>
+                <div className="min-h-screen bg-gray-50 flex flex-col">
+                  {/* Global Components */}
+                  <OfflineIndicator isOnline={isOnline} />
+                  <PWAInstallPrompt />
+                  {swUpdate && (
+                    <UpdateAvailable onUpdate={handleSWUpdate} />
+                  )}
+                  
+                  {/* Main Layout */}
+                  <Header />
+                  
+                  <main className="flex-1">
+                    <Suspense fallback={<GlobalLoader />}>
+                      <AnimatePresence mode="wait">
+                        <Routes>
+                          <Route 
+                            path="/" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <Home />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          <Route 
+                            path="/about" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <About />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          <Route 
+                            path="/programs" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <Programs />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          <Route 
+                            path="/team" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <Team />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          <Route 
+                            path="/news" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <News />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          <Route 
+                            path="/contact" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <Contact />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          {/* New Routes */}
+                          <Route 
+                            path="/partners" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <Partners />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          <Route 
+                            path="/gallery" 
+                            element={
+                              <AnalyticsRoute>
+                                <motion.div
+                                  initial="initial"
+                                  animate="in"
+                                  exit="out"
+                                  variants={pageVariants}
+                                  transition={pageTransition}
+                                >
+                                  <Gallery />
+                                </motion.div>
+                              </AnalyticsRoute>
+                            } 
+                          />
+                          
+                          {/* Legacy route redirects */}
+                          <Route path="/partenaires" element={<Navigate to="/partners" replace />} />
+                          <Route path="/galerie" element={<Navigate to="/gallery" replace />} />
+                          <Route path="/evenements" element={<Navigate to="/gallery" replace />} />
+                          
+                          {/* Offline page */}
+                          <Route 
+                            path="/offline" 
+                            element={
+                              <motion.div
+                                initial="initial"
+                                animate="in"
+                                exit="out"
+                                variants={pageVariants}
+                                transition={pageTransition}
+                              >
+                                <Offline />
+                              </motion.div>
+                            } 
+                          />
+                          
+                          {/* 404 page */}
+                          <Route 
+                            path="*" 
+                            element={
+                              <motion.div
+                                initial="initial"
+                                animate="in"
+                                exit="out"
+                                variants={pageVariants}
+                                transition={pageTransition}
+                              >
+                                <NotFound />
+                              </motion.div>
+                            } 
+                          />
+                        </Routes>
+                      </AnimatePresence>
+                    </Suspense>
+                  </main>
+                  
+                  <Footer />
+                  <AudioPlayer />
+                  
+                  {/* Toast notifications */}
+                  <Toaster
+                    position="bottom-right"
+                    toastOptions={{
+                      duration: 4000,
+                      style: {
+                        background: '#363636',
+                        color: '#fff',
+                      },
+                      success: {
+                        style: {
+                          background: '#10b981',
+                        },
+                      },
+                      error: {
+                        style: {
+                          background: '#ef4444',
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </Router>
+            </AudioProvider>
+          </AppProvider>
+        </PWAProvider>
+      </ErrorBoundary>
     </HelmetProvider>
   );
-};
+}
 
 export default App;
