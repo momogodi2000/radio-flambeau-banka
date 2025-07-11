@@ -1,25 +1,38 @@
 // public/sw.js - Enhanced Service Worker for Radio Flambeau-Banka PWA
 
-const CACHE_NAME = 'radio-flambeau-banka-v2.0.1';
-const OFFLINE_PAGE = '/offline.html';
+const CACHE_NAME = 'radio-flambeau-banka-v2.0.2';
+const OFFLINE_PAGE = '/offline';
 const FALLBACK_AUDIO = '/audio/offline-message.mp3';
 
 // Enhanced caching strategy with different cache categories
-const STATIC_CACHE = 'static-v2.0.1';
-const DYNAMIC_CACHE = 'dynamic-v2.0.1';
-const AUDIO_CACHE = 'audio-v2.0.1';
-const IMAGE_CACHE = 'images-v2.0.1';
-const API_CACHE = 'api-v2.0.1';
+const STATIC_CACHE = 'static-v2.0.2';
+const DYNAMIC_CACHE = 'dynamic-v2.0.2';
+const AUDIO_CACHE = 'audio-v2.0.2';
+const IMAGE_CACHE = 'images-v2.0.2';
+const API_CACHE = 'api-v2.0.2';
+
+// SPA routes that should serve index.html
+const SPA_ROUTES = [
+  '/',
+  '/about',
+  '/contact',
+  '/gallery',
+  '/news',
+  '/offline',
+  '/partners',
+  '/programs',
+  '/team'
+];
 
 // Resources to cache immediately on install
 const STATIC_ASSETS = [
   '/',
-  '/offline.html',
+  '/index.html',
+  '/offline',
   '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
-  '/css/app.css',
-  '/js/app.js',
+  '/icons/android-chrome-192x192.png',
+  '/icons/apple-touch-icon.png',
+  '/icons/favicon.ico',
   '/audio/offline-message.mp3',
   '/images/logo.png',
   '/images/hero-bg.jpg'
@@ -102,6 +115,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
+  // Handle SPA routes
+  if (isSPARoute(url)) {
+    event.respondWith(networkFirstWithOfflineFallback(event.request));
+    return;
+  }
+  
   // Handle different types of requests with appropriate strategies
   if (isStaticAsset(url)) {
     event.respondWith(cacheFirst(event.request, STATIC_CACHE));
@@ -173,10 +192,15 @@ async function networkFirst(request, cacheName) {
   }
 }
 
-// Network First with Offline Fallback - For HTML pages
+// Network First with Offline Fallback - For HTML pages and SPA routes
 async function networkFirstWithOfflineFallback(request) {
   try {
-    const networkResponse = await fetch(request);
+    // For SPA routes, we want to serve the index.html file
+    const requestToFetch = isSPARoute(new URL(request.url)) 
+      ? new Request('/index.html') 
+      : request;
+    
+    const networkResponse = await fetch(requestToFetch);
     
     if (networkResponse.ok) {
       const cache = await caches.open(DYNAMIC_CACHE);
@@ -195,9 +219,22 @@ async function networkFirstWithOfflineFallback(request) {
       return cachedResponse;
     }
     
+    // If it's an SPA route, try to return the cached index.html
+    if (isSPARoute(new URL(request.url))) {
+      const indexResponse = await cache.match('/index.html');
+      if (indexResponse) {
+        return indexResponse;
+      }
+    }
+    
     // Return offline page for navigation requests
     if (request.mode === 'navigate') {
-      return caches.match(OFFLINE_PAGE);
+      const offlineResponse = await caches.match(OFFLINE_PAGE);
+      if (offlineResponse) {
+        return offlineResponse;
+      }
+      // Fallback to cached index.html if offline page is not available
+      return caches.match('/index.html');
     }
     
     return new Response('Offline', { status: 503 });
@@ -251,6 +288,11 @@ function isHTMLPage(request) {
          request.headers.get('Accept').includes('text/html');
 }
 
+// Handle SPA routes - check if the request is for a known SPA route
+function isSPARoute(url) {
+  return SPA_ROUTES.some(route => url.pathname === route);
+}
+
 // Background Sync for offline actions
 self.addEventListener('sync', (event) => {
   console.log('[SW] Background sync triggered:', event.tag);
@@ -290,9 +332,9 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: 'Nouvelle émission en direct !',
-    icon: '/icons/icon-192x192.png',
-    badge: '/icons/badge-72x72.png',
-    image: '/images/notification-image.jpg',
+    icon: '/icons/android-chrome-192x192.png',
+    badge: '/icons/apple-touch-icon.png',
+    image: '/images/logo.png',
     tag: 'radio-notification',
     renotify: true,
     requireInteraction: false,
@@ -300,12 +342,12 @@ self.addEventListener('push', (event) => {
       {
         action: 'listen',
         title: 'Écouter',
-        icon: '/icons/action-play.png'
+        icon: '/icons/android-chrome-192x192.png'
       },
       {
         action: 'dismiss',
         title: 'Ignorer',
-        icon: '/icons/action-close.png'
+        icon: '/icons/android-chrome-192x192.png'
       }
     ],
     data: {
@@ -490,6 +532,13 @@ async function sendContactForm(formData) {
   
   // In a real app, you'd send this to your backend API
   console.log('[SW] Would send form data:', formData);
+  return Promise.resolve();
+}
+
+// Sync analytics data
+async function syncAnalytics() {
+  // Implementation for syncing analytics data when back online
+  console.log('[SW] Syncing analytics data');
   return Promise.resolve();
 }
 

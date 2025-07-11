@@ -1,4 +1,4 @@
-// src/context/PWAContext.jsx - PWA Context for installation and offline capabilities
+// src/context/PWAContext.jsx - Enhanced PWA Context with device detection
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const PWAContext = createContext();
@@ -18,23 +18,92 @@ export const PWAProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [cacheSize, setCacheSize] = useState(0);
+  const [deviceInfo, setDeviceInfo] = useState(null);
+
+  // Enhanced device detection
+  useEffect(() => {
+    const detectDevice = () => {
+      const ua = navigator.userAgent;
+      const platform = navigator.platform;
+      
+      const info = {
+        // Device type detection
+        isMobile: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua),
+        isTablet: /iPad|Android(?!.*Mobile)/i.test(ua),
+        isDesktop: !/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua),
+        
+        // OS detection
+        isIOS: /iPad|iPhone|iPod/.test(ua) && !window.MSStream,
+        isAndroid: /Android/.test(ua),
+        isWindows: /Windows/.test(ua),
+        isMacOS: /Macintosh|MacIntel|MacPPC|Mac68K/.test(platform),
+        isLinux: /Linux/.test(platform),
+        
+        // Browser detection
+        isChrome: /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor),
+        isSafari: /Safari/.test(ua) && /Apple Computer/.test(navigator.vendor),
+        isFirefox: /Firefox/.test(ua),
+        isEdge: /Edg/.test(ua),
+        
+        // PWA detection
+        isPWA: window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches,
+        
+        // Device capabilities
+        touchSupport: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+        orientation: screen.orientation?.type || 'unknown',
+        
+        // Screen info
+        screenWidth: screen.width,
+        screenHeight: screen.height,
+        pixelRatio: window.devicePixelRatio || 1,
+      };
+      
+      setDeviceInfo(info);
+      return info;
+    };
+    
+    const info = detectDevice();
+    
+    // Set up orientation change listener
+    const handleOrientationChange = () => {
+      setDeviceInfo(prev => ({
+        ...prev,
+        orientation: screen.orientation?.type || 'unknown'
+      }));
+    };
+    
+    window.addEventListener('orientationchange', handleOrientationChange);
+    screen.orientation?.addEventListener('change', handleOrientationChange);
+    
+    return () => {
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      screen.orientation?.removeEventListener('change', handleOrientationChange);
+    };
+  }, []);
 
   // Check if app is already installed
   useEffect(() => {
     const checkInstallation = () => {
-      // Check for standalone mode (iOS)
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      if (!deviceInfo) return;
       
-      // Check for installed PWA (Android/Desktop)
-      const isInstalled = window.navigator.standalone || 
-                         isStandalone ||
-                         document.referrer.includes('android-app://');
-      
-      setIsInstalled(isInstalled);
+      // Different checks based on platform
+      if (deviceInfo.isIOS) {
+        // iOS standalone mode
+        const isStandalone = window.navigator.standalone === true;
+        setIsInstalled(isStandalone);
+      } else {
+        // Android/Desktop PWA mode
+        const isDisplayModeStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const isInstalledPWA = isDisplayModeStandalone || 
+                              document.referrer.includes('android-app://') ||
+                              localStorage.getItem('pwa-installed') === 'true';
+        
+        setIsInstalled(isInstalledPWA);
+      }
     };
 
     checkInstallation();
-  }, []);
+  }, [deviceInfo]);
 
   // Listen for beforeinstallprompt event
   useEffect(() => {
@@ -50,6 +119,7 @@ export const PWAProvider = ({ children }) => {
       setIsInstalled(true);
       setCanInstall(false);
       setDeferredPrompt(null);
+      localStorage.setItem('pwa-installed', 'true');
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -96,30 +166,75 @@ export const PWAProvider = ({ children }) => {
     }
   }, []);
 
-  // Install PWA
+  // Install PWA with platform-specific handling
   const installPWA = async () => {
-    if (!deferredPrompt) {
-      console.log('[PWA] No deferred prompt available');
+    // For iOS Safari, show manual installation instructions
+    if (deviceInfo?.isIOS && deviceInfo?.isSafari) {
+      showIOSInstallInstructions();
       return false;
     }
-
-    try {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
+    
+    // For Android Chrome or other browsers that support the install prompt
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        console.log(`[PWA] User choice: ${outcome}`);
+        
+        if (outcome === 'accepted') {
+          setCanInstall(false);
+          setDeferredPrompt(null);
+          localStorage.setItem('pwa-installed', 'true');
+          return true;
+        }
+        
+        return false;
+      } catch (error) {
+        console.error('[PWA] Install error:', error);
+        return false;
+      }
+    } else {
+      console.log('[PWA] No deferred prompt available');
       
-      console.log(`[PWA] User choice: ${outcome}`);
-      
-      if (outcome === 'accepted') {
-        setCanInstall(false);
-        setDeferredPrompt(null);
-        return true;
+      // For desktop browsers without install prompt
+      if (deviceInfo?.isDesktop) {
+        showDesktopInstallInstructions();
       }
       
       return false;
-    } catch (error) {
-      console.error('[PWA] Install error:', error);
-      return false;
     }
+  };
+  
+  // Show iOS installation instructions
+  const showIOSInstallInstructions = () => {
+    const instructions = `
+      Pour installer cette app sur votre iPhone/iPad:
+      
+      1. Appuyez sur le bouton de partage ${deviceInfo?.isSafari ? '📤' : '⋯'} en bas de l'écran
+      2. Faites défiler et sélectionnez "Sur l'écran d'accueil"
+      3. Appuyez sur "Ajouter" en haut à droite
+      
+      Vous pourrez ensuite accéder à l'application depuis votre écran d'accueil.
+    `;
+    alert(instructions);
+  };
+  
+  // Show desktop installation instructions
+  const showDesktopInstallInstructions = () => {
+    let instructions = 'Pour installer cette application:';
+    
+    if (deviceInfo?.isChrome) {
+      instructions += '\n\n1. Cliquez sur l\'icône ⋮ en haut à droite\n2. Sélectionnez "Installer Radio Flambeau-Banka"\n3. Suivez les instructions à l\'écran';
+    } else if (deviceInfo?.isEdge) {
+      instructions += '\n\n1. Cliquez sur l\'icône ⋯ en haut à droite\n2. Sélectionnez "Applications" puis "Installer ce site comme une application"\n3. Suivez les instructions à l\'écran';
+    } else if (deviceInfo?.isFirefox) {
+      instructions += '\n\nDans Firefox, vous pouvez ajouter notre site à votre écran d\'accueil, mais l\'installation complète en tant qu\'application n\'est pas encore supportée.';
+    } else {
+      instructions += '\n\nRecherchez une option "Installer" ou "Ajouter à l\'écran d\'accueil" dans le menu de votre navigateur.';
+    }
+    
+    alert(instructions);
   };
 
   // Get cache size
@@ -276,24 +391,21 @@ export const PWAProvider = ({ children }) => {
     }
   };
 
-  // Add device and browser detection
-  const getDeviceType = () => {
-    const ua = navigator.userAgent;
-    if (/iPad|iPhone|iPod/.test(ua)) return 'ios';
-    if (/Android/.test(ua)) return 'android';
-    if (/Windows|Macintosh|Linux/.test(ua) && !/Mobile/.test(ua)) return 'desktop';
-    return 'other';
+  // Check if installation is supported
+  const isInstallSupported = () => {
+    if (!deviceInfo) return false;
+    
+    // Chrome on Android
+    if (deviceInfo.isAndroid && deviceInfo.isChrome) return true;
+    
+    // Chrome/Edge on Desktop
+    if (deviceInfo.isDesktop && (deviceInfo.isChrome || deviceInfo.isEdge)) return true;
+    
+    // Safari on iOS (Add to Home Screen)
+    if (deviceInfo.isIOS && deviceInfo.isSafari) return true;
+    
+    return false;
   };
-  const getBrowser = () => {
-    const ua = navigator.userAgent;
-    if (/Chrome/.test(ua) && /Google Inc/.test(navigator.vendor)) return 'chrome';
-    if (/Safari/.test(ua) && /Apple Computer/.test(navigator.vendor)) return 'safari';
-    if (/Firefox/.test(ua)) return 'firefox';
-    if (/Edg/.test(ua)) return 'edge';
-    return 'other';
-  };
-  const deviceType = getDeviceType();
-  const browser = getBrowser();
 
   const value = {
     // State
@@ -303,8 +415,7 @@ export const PWAProvider = ({ children }) => {
     updateAvailable,
     cacheSize: formatCacheSize(cacheSize),
     rawCacheSize: cacheSize,
-    deviceType,
-    browser,
+    deviceInfo,
     
     // Functions
     installPWA,
@@ -316,6 +427,9 @@ export const PWAProvider = ({ children }) => {
     updateServiceWorker,
     getCacheSize,
     getDeviceCapabilities,
+    isInstallSupported,
+    showIOSInstallInstructions,
+    showDesktopInstallInstructions,
     
     // Utilities
     formatCacheSize

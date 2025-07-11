@@ -21,17 +21,17 @@ import OfflineIndicator from './components/Common/OfflineIndicator';
 import PWAInstallPrompt from './components/PWA/PWAInstallPrompt';
 import UpdateAvailable from './components/PWA/UpdateAvailable';
 
-// Lazy-loaded pages for better performance
-const Home = lazy(() => import('./pages/Home'));
-const About = lazy(() => import('./pages/About'));
-const Programs = lazy(() => import('./pages/Programs'));
-const Team = lazy(() => import('./pages/Team'));
-const News = lazy(() => import('./pages/News'));
-const Contact = lazy(() => import('./pages/Contact'));
-const Partners = lazy(() => import('./pages/Partners'));
-const Gallery = lazy(() => import('./pages/Gallery'));
-const Offline = lazy(() => import('./pages/Offline'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+// Lazy-loaded pages with better error handling
+const Home = lazy(() => import('./pages/Home').catch(() => ({ default: () => <div>Error loading Home page</div> })));
+const About = lazy(() => import('./pages/About').catch(() => ({ default: () => <div>Error loading About page</div> })));
+const Programs = lazy(() => import('./pages/Programs').catch(() => ({ default: () => <div>Error loading Programs page</div> })));
+const Team = lazy(() => import('./pages/Team').catch(() => ({ default: () => <div>Error loading Team page</div> })));
+const News = lazy(() => import('./pages/News').catch(() => ({ default: () => <div>Error loading News page</div> })));
+const Contact = lazy(() => import('./pages/Contact').catch(() => ({ default: () => <div>Error loading Contact page</div> })));
+const Partners = lazy(() => import('./pages/Partners').catch(() => ({ default: () => <div>Error loading Partners page</div> })));
+const Gallery = lazy(() => import('./pages/Gallery').catch(() => ({ default: () => <div>Error loading Gallery page</div> })));
+const Offline = lazy(() => import('./pages/Offline').catch(() => ({ default: () => <div>You are offline</div> })));
+const NotFound = lazy(() => import('./pages/NotFound').catch(() => ({ default: () => <div>Page not found</div> })));
 
 // Global Loading Component
 const GlobalLoader = () => (
@@ -47,6 +47,9 @@ const GlobalLoader = () => (
           src="/images/logo.png" 
           alt="Radio Flambeau-Banka" 
           className="w-24 h-24 mx-auto mb-4"
+          onError={(e) => {
+            e.target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNjY3ZWVhIiByeD0iMTAiLz4KPHR5ZD48L3RleHQ+Cjwvc3ZnPgo=";
+          }}
         />
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Radio Flambeau-Banka</h2>
         <p className="text-gray-600">Chargement en cours...</p>
@@ -217,7 +220,7 @@ function App() {
                     {/* Main Layout */}
                     <Header />
                     
-                    <main className="flex-1">
+                    <main className="flex-1 w-full">
                       <Suspense fallback={<GlobalLoader />}>
                         <AnimatePresence mode="wait">
                           <Routes>
@@ -226,6 +229,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="home-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -243,6 +247,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="about-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -260,6 +265,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="programs-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -277,6 +283,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="team-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -294,6 +301,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="news-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -311,6 +319,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="contact-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -329,6 +338,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="partners-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -346,6 +356,7 @@ function App() {
                               element={
                                 <AnalyticsRoute>
                                   <motion.div
+                                    key="gallery-page"
                                     initial="initial"
                                     animate="in"
                                     exit="out"
@@ -368,6 +379,7 @@ function App() {
                               path="/offline" 
                               element={
                                 <motion.div
+                                  key="offline-page"
                                   initial="initial"
                                   animate="in"
                                   exit="out"
@@ -384,6 +396,7 @@ function App() {
                               path="*" 
                               element={
                                 <motion.div
+                                  key="notfound-page"
                                   initial="initial"
                                   animate="in"
                                   exit="out"
