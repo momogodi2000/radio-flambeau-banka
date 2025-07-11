@@ -138,10 +138,10 @@ const Contact = () => {
         <meta name="keywords" content="contact radio flambeau banka, email radio cameroun, whatsapp radio, contact radio communautaire" />
       </Helmet>
 
-      <div ref={ref} className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div ref={ref} className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
         {/* Hero Section */}
-        <section className="pt-32 pb-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="pt-32 pb-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white relative overflow-hidden dark:from-gray-900 dark:to-purple-900">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -152,7 +152,7 @@ const Contact = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Contactez-nous
               </h1>
-              <p className="text-xl md:text-2xl max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100 dark:text-purple-200">
                 Votre voix compte ! Partagez vos idées, posez vos questions ou rejoignez notre communauté.
               </p>
             </motion.div>
@@ -167,19 +167,19 @@ const Contact = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6 }}
-                className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 text-white cursor-pointer hover:shadow-xl transition-all duration-300 group"
+                className="bg-gradient-to-br from-green-500 to-green-600 dark:from-green-700 dark:to-green-900 rounded-2xl p-8 text-white cursor-pointer hover:shadow-xl transition-all duration-300 group"
                 onClick={() => window.open('https://wa.me/237696044661')}
               >
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 dark:bg-white/10 rounded-full flex items-center justify-center">
                     <MessageCircle size={32} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold">WhatsApp</h3>
-                    <p className="text-green-100">+237 696 044 661</p>
+                    <p className="text-green-100 dark:text-green-200">+237 696 044 661</p>
                   </div>
                 </div>
-                <p className="text-green-100 mb-4">
+                <p className="text-green-100 dark:text-green-200 mb-4">
                   Contactez-nous instantanément via WhatsApp pour une réponse rapide
                 </p>
                 <div className="flex items-center justify-end">
@@ -191,20 +191,20 @@ const Contact = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white cursor-pointer hover:shadow-xl transition-all duration-300 group"
+                className="bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-900 rounded-2xl p-8 text-white cursor-pointer hover:shadow-xl transition-all duration-300 group"
                 onClick={() => window.open('mailto:radoiflambeaubanka@gmail.com')}
               >
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 dark:bg-white/10 rounded-full flex items-center justify-center">
                     <Mail size={32} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold">Email</h3>
-                    <p className="text-blue-100">radoiflambeaubanka@gmail.com</p>
+                    <p className="text-blue-100 dark:text-blue-200">radoiflambeaubanka@gmail.com</p>
                   </div>
                 </div>
-                <p className="text-blue-100 mb-4">
-                  Envoyez-nous un email détaillé, nous répondons dans les plus brefs délais
+                <p className="text-blue-100 dark:text-blue-200 mb-4">
+                  Envoyez-nous un email, nous répondons rapidement
                 </p>
                 <div className="flex items-center justify-end">
                   <ExternalLink size={20} className="transform group-hover:translate-x-1 transition-transform" />

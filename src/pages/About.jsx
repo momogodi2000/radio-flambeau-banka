@@ -95,10 +95,10 @@ const About = () => {
         <link rel="canonical" href="https://www.radioflambeaubanka.com/about" />
       </Helmet>
       
-      <div className="min-h-screen bg-white" ref={ref}>
+      <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -109,10 +109,10 @@ const About = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Notre Histoire
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100">
+              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-purple-200">
                 Plus de 10 ans au service de la communauté de Banka
               </p>
-              <div className="w-24 h-1 bg-white mx-auto rounded-full"></div>
+              <div className="w-24 h-1 bg-white dark:bg-purple-400 mx-auto rounded-full"></div>
             </motion.div>
           </div>
         </section>
@@ -126,10 +126,10 @@ const About = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-6">
                   Une voix qui éclaire depuis 2014
                 </h2>
-                <div className="space-y-4 text-gray-600 leading-relaxed">
+                <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
                   <p>
                     Radio Flambeau-Banka a vu le jour en 2014 avec une vision claire : 
                     devenir la voix authentique de la communauté de Banka. Fondée par 
@@ -158,12 +158,12 @@ const About = () => {
                 className="grid grid-cols-2 gap-6"
               >
                 {stats.map((stat, index) => (
-                  <div key={index} className="text-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div key={index} className="text-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-purple-700 dark:to-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
                       <stat.icon size={32} className="text-white" />
                     </div>
-                    <div className="text-3xl font-bold text-gray-800 mb-2">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-3xl font-bold text-gray-800 dark:text-white mb-2">{stat.value}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -172,22 +172,22 @@ const About = () => {
         </section>
         
         {/* Mission et Vision */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gray-50 dark:bg-gray-800">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8 }}
-                className="bg-white rounded-3xl p-8 shadow-lg"
+                className="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-lg"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-purple-700 dark:to-blue-900 rounded-full flex items-center justify-center mr-4">
                     <Target size={24} className="text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800">Notre Mission</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Notre Mission</h3>
                 </div>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                   Informer, éduquer et divertir la communauté de Banka et la diaspora 
                   camerounaise à travers des programmes de qualité, tout en promouvant 
                   les valeurs culturelles et le développement local.

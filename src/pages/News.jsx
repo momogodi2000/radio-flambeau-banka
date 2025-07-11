@@ -206,10 +206,10 @@ const News = () => {
         <link rel="canonical" href="https://www.radioflambeaubanka.com/news" />
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50" ref={ref}>
+      <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -220,23 +220,10 @@ const News = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Actualités
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100">
-                Restez informé avec nos dernières nouvelles et événements
+              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-purple-200">
+                Les dernières nouvelles, événements et histoires de la communauté
               </p>
-              <div className="flex items-center justify-center space-x-6 text-sm">
-                <div className="flex items-center space-x-2">
-                  <TrendingUp size={16} />
-                  <span>Actualités récentes</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Star size={16} />
-                  <span>À la une</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <MessageCircle size={16} />
-                  <span>Restez connecté</span>
-                </div>
-              </div>
+              <div className="w-24 h-1 bg-white dark:bg-purple-400 mx-auto rounded-full"></div>
             </motion.div>
           </div>
         </section>

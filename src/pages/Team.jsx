@@ -188,10 +188,10 @@ const Team = () => {
         <link rel="canonical" href="https://www.radioflambeaubanka.com/team" />
       </Helmet>
       
-      <div className="min-h-screen bg-gray-50" ref={ref}>
+      <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -202,23 +202,10 @@ const Team = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Notre Équipe
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100">
-                Les voix passionnées qui font vivre Radio Flambeau-Banka
+              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-purple-200">
+                Découvrez les animateurs, journalistes et techniciens qui font vivre la radio
               </p>
-              <div className="flex items-center justify-center space-x-6 text-sm">
-                <div className="flex items-center space-x-2">
-                  <Heart size={16} />
-                  <span>15+ talents</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Star size={16} />
-                  <span>Excellence reconnue</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Users size={16} />
-                  <span>Équipe unie</span>
-                </div>
-              </div>
+              <div className="w-24 h-1 bg-white dark:bg-purple-400 mx-auto rounded-full"></div>
             </motion.div>
           </div>
         </section>

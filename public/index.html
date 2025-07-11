@@ -6,3 +6,20 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXXXXX');
 </script>
+    <meta name="theme-color" content="#2563eb" id="theme-color-meta">
+    <script>
+      (function() {
+        function setThemeColor() {
+          const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          const meta = document.getElementById('theme-color-meta');
+          if (theme === 'dark') {
+            meta.setAttribute('content', '#18181b'); // dark background
+          } else {
+            meta.setAttribute('content', '#2563eb'); // light theme color
+          }
+        }
+        setThemeColor();
+        window.addEventListener('storage', setThemeColor);
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setThemeColor);
+      })();
+    </script>

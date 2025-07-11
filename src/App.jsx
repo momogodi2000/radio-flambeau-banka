@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import { AudioProvider } from './context/AudioContext';
 import { AppProvider } from './context/AppContext';
 import { PWAProvider } from './context/PWAContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Core Components
 import Header from './components/Header/Header';
@@ -199,30 +200,173 @@ function App() {
 
   return (
     <HelmetProvider>
-      <ErrorBoundary>
-        <PWAProvider>
-          <AppProvider>
-            <AudioProvider>
-              <Router>
-                <div className="min-h-screen bg-gray-50 flex flex-col">
-                  {/* Global Components */}
-                  <OfflineIndicator isOnline={isOnline} />
-                  <PWAInstallPrompt />
-                  {swUpdate && (
-                    <UpdateAvailable onUpdate={handleSWUpdate} />
-                  )}
-                  
-                  {/* Main Layout */}
-                  <Header />
-                  
-                  <main className="flex-1">
-                    <Suspense fallback={<GlobalLoader />}>
-                      <AnimatePresence mode="wait">
-                        <Routes>
-                          <Route 
-                            path="/" 
-                            element={
-                              <AnalyticsRoute>
+      <ThemeProvider>
+        <ErrorBoundary>
+          <PWAProvider>
+            <AppProvider>
+              <AudioProvider>
+                <Router>
+                  <div className="min-h-screen bg-gray-50 flex flex-col">
+                    {/* Global Components */}
+                    <OfflineIndicator isOnline={isOnline} />
+                    <PWAInstallPrompt />
+                    {swUpdate && (
+                      <UpdateAvailable onUpdate={handleSWUpdate} />
+                    )}
+                    
+                    {/* Main Layout */}
+                    <Header />
+                    
+                    <main className="flex-1">
+                      <Suspense fallback={<GlobalLoader />}>
+                        <AnimatePresence mode="wait">
+                          <Routes>
+                            <Route 
+                              path="/" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <Home />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            <Route 
+                              path="/about" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <About />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            <Route 
+                              path="/programs" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <Programs />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            <Route 
+                              path="/team" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <Team />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            <Route 
+                              path="/news" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <News />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            <Route 
+                              path="/contact" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <Contact />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            {/* New Routes */}
+                            <Route 
+                              path="/partners" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <Partners />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            <Route 
+                              path="/gallery" 
+                              element={
+                                <AnalyticsRoute>
+                                  <motion.div
+                                    initial="initial"
+                                    animate="in"
+                                    exit="out"
+                                    variants={pageVariants}
+                                    transition={pageTransition}
+                                  >
+                                    <Gallery />
+                                  </motion.div>
+                                </AnalyticsRoute>
+                              } 
+                            />
+                            
+                            {/* Legacy route redirects */}
+                            <Route path="/partenaires" element={<Navigate to="/partners" replace />} />
+                            <Route path="/galerie" element={<Navigate to="/gallery" replace />} />
+                            <Route path="/evenements" element={<Navigate to="/gallery" replace />} />
+                            
+                            {/* Offline page */}
+                            <Route 
+                              path="/offline" 
+                              element={
                                 <motion.div
                                   initial="initial"
                                   animate="in"
@@ -230,16 +374,15 @@ function App() {
                                   variants={pageVariants}
                                   transition={pageTransition}
                                 >
-                                  <Home />
+                                  <Offline />
                                 </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          <Route 
-                            path="/about" 
-                            element={
-                              <AnalyticsRoute>
+                              } 
+                            />
+                            
+                            {/* 404 page */}
+                            <Route 
+                              path="*" 
+                              element={
                                 <motion.div
                                   initial="initial"
                                   animate="in"
@@ -247,186 +390,46 @@ function App() {
                                   variants={pageVariants}
                                   transition={pageTransition}
                                 >
-                                  <About />
+                                  <NotFound />
                                 </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          <Route 
-                            path="/programs" 
-                            element={
-                              <AnalyticsRoute>
-                                <motion.div
-                                  initial="initial"
-                                  animate="in"
-                                  exit="out"
-                                  variants={pageVariants}
-                                  transition={pageTransition}
-                                >
-                                  <Programs />
-                                </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          <Route 
-                            path="/team" 
-                            element={
-                              <AnalyticsRoute>
-                                <motion.div
-                                  initial="initial"
-                                  animate="in"
-                                  exit="out"
-                                  variants={pageVariants}
-                                  transition={pageTransition}
-                                >
-                                  <Team />
-                                </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          <Route 
-                            path="/news" 
-                            element={
-                              <AnalyticsRoute>
-                                <motion.div
-                                  initial="initial"
-                                  animate="in"
-                                  exit="out"
-                                  variants={pageVariants}
-                                  transition={pageTransition}
-                                >
-                                  <News />
-                                </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          <Route 
-                            path="/contact" 
-                            element={
-                              <AnalyticsRoute>
-                                <motion.div
-                                  initial="initial"
-                                  animate="in"
-                                  exit="out"
-                                  variants={pageVariants}
-                                  transition={pageTransition}
-                                >
-                                  <Contact />
-                                </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          {/* New Routes */}
-                          <Route 
-                            path="/partners" 
-                            element={
-                              <AnalyticsRoute>
-                                <motion.div
-                                  initial="initial"
-                                  animate="in"
-                                  exit="out"
-                                  variants={pageVariants}
-                                  transition={pageTransition}
-                                >
-                                  <Partners />
-                                </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          <Route 
-                            path="/gallery" 
-                            element={
-                              <AnalyticsRoute>
-                                <motion.div
-                                  initial="initial"
-                                  animate="in"
-                                  exit="out"
-                                  variants={pageVariants}
-                                  transition={pageTransition}
-                                >
-                                  <Gallery />
-                                </motion.div>
-                              </AnalyticsRoute>
-                            } 
-                          />
-                          
-                          {/* Legacy route redirects */}
-                          <Route path="/partenaires" element={<Navigate to="/partners" replace />} />
-                          <Route path="/galerie" element={<Navigate to="/gallery" replace />} />
-                          <Route path="/evenements" element={<Navigate to="/gallery" replace />} />
-                          
-                          {/* Offline page */}
-                          <Route 
-                            path="/offline" 
-                            element={
-                              <motion.div
-                                initial="initial"
-                                animate="in"
-                                exit="out"
-                                variants={pageVariants}
-                                transition={pageTransition}
-                              >
-                                <Offline />
-                              </motion.div>
-                            } 
-                          />
-                          
-                          {/* 404 page */}
-                          <Route 
-                            path="*" 
-                            element={
-                              <motion.div
-                                initial="initial"
-                                animate="in"
-                                exit="out"
-                                variants={pageVariants}
-                                transition={pageTransition}
-                              >
-                                <NotFound />
-                              </motion.div>
-                            } 
-                          />
-                        </Routes>
-                      </AnimatePresence>
-                    </Suspense>
-                  </main>
-                  
-                  <Footer />
-                  <AudioPlayer />
-                  
-                  {/* Toast notifications */}
-                  <Toaster
-                    position="bottom-right"
-                    toastOptions={{
-                      duration: 4000,
-                      style: {
-                        background: '#363636',
-                        color: '#fff',
-                      },
-                      success: {
+                              } 
+                            />
+                          </Routes>
+                        </AnimatePresence>
+                      </Suspense>
+                    </main>
+                    
+                    <Footer />
+                    <AudioPlayer />
+                    
+                    {/* Toast notifications */}
+                    <Toaster
+                      position="bottom-right"
+                      toastOptions={{
+                        duration: 4000,
                         style: {
-                          background: '#10b981',
+                          background: '#363636',
+                          color: '#fff',
                         },
-                      },
-                      error: {
-                        style: {
-                          background: '#ef4444',
+                        success: {
+                          style: {
+                            background: '#10b981',
+                          },
                         },
-                      },
-                    }}
-                  />
-                </div>
-              </Router>
-            </AudioProvider>
-          </AppProvider>
-        </PWAProvider>
-      </ErrorBoundary>
+                        error: {
+                          style: {
+                            background: '#ef4444',
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                </Router>
+              </AudioProvider>
+            </AppProvider>
+          </PWAProvider>
+        </ErrorBoundary>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }

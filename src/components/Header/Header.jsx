@@ -19,10 +19,13 @@ import {
   Download,
   Wifi,
   WifiOff,
-  LogIn
+  LogIn,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useAudio } from '../../context/AudioContext';
 import { usePWA } from '../../context/PWAContext';
+import { useTheme } from '../../context/ThemeContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +33,7 @@ const Header = () => {
   const location = useLocation();
   const { isPlaying, isLoading } = useAudio();
   const { canInstall, installPWA, isOnline } = usePWA();
+  const { theme, toggleTheme } = useTheme();
 
   // Enhanced navigation items with new pages
   const navigationItems = [
@@ -189,6 +193,16 @@ const Header = () => {
                 {isOnline ? <Wifi size={14} /> : <WifiOff size={14} />}
                 <span>{isOnline ? 'En ligne' : 'Hors ligne'}</span>
               </div>
+
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
+                className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-300
+                  ${isScrolled ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' : 'bg-white/20 text-white hover:bg-white/30'}`}
+              >
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
 
               {/* PWA Install Button */}
               {canInstall && (

@@ -406,23 +406,24 @@ const Partners = () => {
         <meta name="keywords" content="partenaires radio flambeau banka, PROTEGE QV, chef banka, voix de femmes, partenariat radio cameroun" />
       </Helmet>
 
-      <div ref={ref} className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="pt-32 pb-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-center"
+              className="text-center max-w-4xl mx-auto"
             >
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Nos Partenaires
               </h1>
-              <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-                Ensemble, nous construisons l'avenir de Radio Flambeau-Banka et développons notre communauté.
+              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-purple-200">
+                Découvrez les organisations et entreprises qui soutiennent Radio Flambeau-Banka
               </p>
+              <div className="w-24 h-1 bg-white dark:bg-purple-400 mx-auto rounded-full"></div>
             </motion.div>
           </div>
         </section>

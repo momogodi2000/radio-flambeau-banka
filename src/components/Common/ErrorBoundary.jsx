@@ -99,6 +99,10 @@ class ErrorBoundary extends React.Component {
               <p className="text-red-100">
                 Nous nous excusons pour cette interruption
               </p>
+              <p className="text-red-200 mt-2">
+                Si l'application reste bloquée sur le chargement ou affiche une page blanche, il y a un problème critique avec l'application React.<br />
+                Essayez de recharger la page, de vider le cache, ou contactez le support si le problème persiste.
+              </p>
             </div>
 
             {/* Content */}

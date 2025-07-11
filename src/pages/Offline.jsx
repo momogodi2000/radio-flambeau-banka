@@ -121,7 +121,7 @@ const Offline = () => {
         <meta name="description" content="Vous êtes actuellement hors ligne. Explorez le contenu disponible en mode hors ligne." />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ const Offline = () => {
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6"
+              className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-purple-700 dark:to-blue-900 rounded-full flex items-center justify-center mx-auto mb-6"
             >
               <WifiOff size={48} className="text-white" />
             </motion.div>
@@ -143,7 +143,7 @@ const Offline = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-4xl md:text-5xl font-bold text-gray-800 mb-4"
+              className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4"
             >
               Mode Hors Ligne
             </motion.h1>
@@ -152,7 +152,7 @@ const Offline = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-xl text-gray-600 mb-8"
+              className="text-xl text-gray-600 dark:text-gray-300 mb-8"
             >
               Vous n'êtes pas connecté à Internet, mais vous pouvez toujours explorer notre contenu en cache.
             </motion.p>
