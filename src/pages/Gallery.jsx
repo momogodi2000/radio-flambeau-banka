@@ -33,15 +33,15 @@ import {
 } from 'lucide-react';
 
 // Import all available images from public folder
-import bafang from '../../public/images/bafang.jpg';
+import bafang from '../../public/images/clovy.jpg';
 import protege from '../../public/images/protege.jpg';
 import qv1 from '../../public/images/qv1.jpg';
 import flyer from '../../public/images/flyer.png';
-import heroBg from '../../public/images/hero-bg.jpg';
+import heroBg from '../../public/images/clovy.jpg';
 import logo from '../../public/images/logo.png';
 
 // Import program images
-import morningProgram from '../../public/images/programs/morning.jpg';
+import morningProgram from '../../public/images/clovy.jpg';
 import musicProgram from '../../public/images/programs/music.jpg';
 import newsProgram from '../../public/images/programs/news.jpg';
 
