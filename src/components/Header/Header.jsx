@@ -21,7 +21,8 @@ import {
   WifiOff,
   LogIn,
   Sun,
-  Moon
+  Moon,
+  Send
 } from 'lucide-react';
 import { useAudio } from '../../context/AudioContext';
 import { usePWA } from '../../context/PWAContext';
@@ -44,7 +45,7 @@ const Header = () => {
     { name: 'Actualités', path: '/news', icon: Newspaper },
     { name: 'Galerie', path: '/gallery', icon: Camera },
     { name: 'Partenaires', path: '/partners', icon: Building2 },
-    { name: 'Contact', path: '/contact', icon: Phone }
+    { name: 'Contact', path: '/contact', icon: Phone },
   ];
 
   // Handle scroll effect

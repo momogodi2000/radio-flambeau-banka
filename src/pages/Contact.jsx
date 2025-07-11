@@ -140,9 +140,9 @@ const Contact = () => {
 
       <div ref={ref} className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
         {/* Hero Section */}
-        <section className="pt-32 pb-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white relative overflow-hidden dark:from-gray-900 dark:to-purple-900">
+        <section className="pt-32 pb-16 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white relative overflow-hidden dark:from-gray-900 dark:to-purple-900">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -152,7 +152,7 @@ const Contact = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Contactez-nous
               </h1>
-              <p className="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100 dark:text-purple-200">
+              <p className="text-lg md:text-xl max-w-3xl mx-auto text-blue-100 dark:text-purple-200">
                 Votre voix compte ! Partagez vos idées, posez vos questions ou rejoignez notre communauté.
               </p>
             </motion.div>
@@ -160,8 +160,8 @@ const Contact = () => {
         </section>
 
         {/* Quick Contact Actions */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
+        <section className="py-10 sm:py-16 md:py-20">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -215,8 +215,8 @@ const Contact = () => {
         </section>
 
         {/* Main Content */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
+        <section className="py-10 sm:py-16 md:py-20">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Contact Information */}
               <motion.div
@@ -226,10 +226,10 @@ const Contact = () => {
                 className="space-y-8"
               >
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                  <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">
                     Informations de Contact
                   </h2>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                     Notre équipe est disponible pour répondre à toutes vos questions, 
                     recevoir vos suggestions et traiter vos demandes. Nous nous engageons 
                     à vous répondre dans les plus brefs délais.
@@ -250,9 +250,9 @@ const Contact = () => {
                         <info.icon size={24} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-800">{info.title}</h3>
-                        <p className="text-gray-700 font-medium">{info.content}</p>
-                        <p className="text-gray-500 text-sm">{info.description}</p>
+                        <h3 className="font-semibold text-gray-800 dark:text-white">{info.title}</h3>
+                        <p className="text-gray-700 dark:text-gray-300 font-medium">{info.content}</p>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm">{info.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -266,14 +266,14 @@ const Contact = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="bg-white rounded-3xl p-8 shadow-lg"
               >
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                   Envoyez-nous un message
                 </h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-gray-700 font-medium mb-2">
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
                         Nom complet *
                       </label>
                       <input
@@ -282,12 +282,12 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                         placeholder="Votre nom"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 font-medium mb-2">
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
                         Email *
                       </label>
                       <input
@@ -296,14 +296,14 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                         placeholder="votre@email.com"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-gray-700 font-medium mb-2">
+                    <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
                       Sujet
                     </label>
                     <input
@@ -311,13 +311,13 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                       placeholder="Sujet de votre message"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-gray-700 font-medium mb-2">
+                    <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
                       Message *
                     </label>
                     <textarea
@@ -326,7 +326,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors resize-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                       placeholder="Votre message..."
                     ></textarea>
                   </div>
@@ -358,18 +358,18 @@ const Contact = () => {
         </section>
 
         {/* Social Media */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-10 sm:py-16 md:py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
               className="text-center max-w-4xl mx-auto"
             >
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">
                 Suivez-nous sur les réseaux sociaux
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
                 Restez connectés avec Radio Flambeau-Banka et ne manquez aucune actualité !
               </p>
               

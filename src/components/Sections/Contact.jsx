@@ -113,10 +113,6 @@ const Contact = () => {
     });
   };
   
-  const openDedicaceForm = () => {
-    openForm('dedicaces');
-  };
-  
   const openNewsletterForm = () => {
     openForm('newsletter');
   };
@@ -208,13 +204,6 @@ const Contact = () => {
               transition={{ duration: 0.8, delay: 1 }}
               className="space-y-4"
             >
-              <button
-                onClick={openDedicaceForm}
-                className="w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white py-3 px-6 rounded-xl font-semibold flex items-center justify-center space-x-3 hover:shadow-lg transition-all duration-300"
-              >
-                <Heart size={20} />
-                <span>Envoyer une dédicace</span>
-              </button>
               
               <button
                 onClick={openNewsletterForm}

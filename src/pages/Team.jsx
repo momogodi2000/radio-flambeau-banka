@@ -190,9 +190,9 @@ const Team = () => {
       
       <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+        <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-10 sm:py-16 md:py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -202,7 +202,7 @@ const Team = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Notre Équipe
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-purple-200">
+              <p className="text-lg md:text-xl mb-8 text-blue-100 dark:text-purple-200">
                 Découvrez les animateurs, journalistes et techniciens qui font vivre la radio
               </p>
               <div className="w-24 h-1 bg-white dark:bg-purple-400 mx-auto rounded-full"></div>
@@ -211,9 +211,9 @@ const Team = () => {
         </section>
         
         {/* Statistiques */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="py-10 sm:py-16 md:py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -234,9 +234,9 @@ const Team = () => {
         </section>
         
         {/* Grille des membres */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section className="py-10 sm:py-16 md:py-20">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {teamMembers.map((member, index) => (
                 <motion.div
                   key={member.id}
@@ -443,8 +443,8 @@ const Team = () => {
         )}
         
         {/* CTA Rejoindre */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-          <div className="container mx-auto px-4 text-center">
+        <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -453,7 +453,7 @@ const Team = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Rejoignez notre équipe !
               </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
                 Vous êtes passionné par la radio et souhaitez contribuer à notre mission ? 
                 Nous recherchons toujours des talents motivés.
               </p>

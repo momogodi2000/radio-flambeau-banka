@@ -118,7 +118,7 @@ const NotFound = () => {
             <h3 className="text-lg font-semibold text-gray-700 mb-4">
               Pages populaires
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 to="/programs"
                 className="p-3 bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 text-sm font-medium text-gray-700 hover:text-blue-600"

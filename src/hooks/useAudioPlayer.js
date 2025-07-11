@@ -125,7 +125,6 @@ const useAudioPlayer = () => {
         'Actualités - Radio Flambeau-Banka',
         'Émission Culturelle - Débat',
         'Musique Traditionnelle',
-        'Dédicaces - Messages d\'auditeurs',
         'Journal Parlé - Actualités',
         'Variétés Internationales'
       ];

@@ -32,8 +32,7 @@ const Footer = () => {
     { name: 'Réveil Matinal', time: '06:00' },
     { name: 'Journal Parlé', time: '12:00' },
     { name: 'Variétés', time: '15:00' },
-    { name: 'Débat', time: '18:00' },
-    { name: 'Dédicaces', time: '20:00' }
+    { name: 'Débat', time: '18:00' }
   ];
   
   const socialLinks = [

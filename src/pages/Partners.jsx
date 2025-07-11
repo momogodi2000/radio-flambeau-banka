@@ -408,9 +408,9 @@ const Partners = () => {
 
       <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+        <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-10 sm:py-16 md:py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -420,7 +420,7 @@ const Partners = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Nos Partenaires
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-purple-200">
+              <p className="text-lg md:text-xl mb-8 text-blue-100 dark:text-purple-200">
                 Découvrez les organisations et entreprises qui soutiennent Radio Flambeau-Banka
               </p>
               <div className="w-24 h-1 bg-white dark:bg-purple-400 mx-auto rounded-full"></div>
@@ -429,7 +429,7 @@ const Partners = () => {
         </section>
 
         {/* Main Partners */}
-        <section className="py-20">
+        <section className="py-10 sm:py-16 md:py-20">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -440,13 +440,13 @@ const Partners = () => {
               <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent mb-4 [--tw-gradient-from:#2563eb] [--tw-gradient-to:#7c3aed]">
                 Partenaires Principaux
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Ces organisations sont au cœur de notre mission et contribuent directement au succès de Radio Flambeau-Banka.
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-              {mainPartners.map((partner, index) => (
+            <div className="grid lg:grid-cols-2 gap-6">
+              {mainPartners && mainPartners.length > 0 ? mainPartners.map((partner, index) => (
                 <motion.div
                   key={partner.id}
                   initial={{ opacity: 0, y: 50 }}
@@ -533,13 +533,13 @@ const Partners = () => {
                     </div>
                   </div>
                 </motion.div>
-              ))}
+              )) : <p>Aucun partenaire principal disponible.</p>}
             </div>
           </div>
         </section>
 
         {/* Voix de Femmes Highlight */}
-        <section className="py-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white">
+        <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -550,7 +550,7 @@ const Partners = () => {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Projet "Voix de Femmes"
               </h2>
-              <p className="text-xl max-w-3xl mx-auto">
+              <p className="text-lg max-w-3xl mx-auto">
                 La voix des femmes enfin sur les ondes ! Un projet révolutionnaire soutenu par nos partenaires.
               </p>
             </motion.div>
@@ -626,7 +626,7 @@ const Partners = () => {
         </section>
 
         {/* Supporting Partners */}
-        <section className="py-20">
+        <section className="py-10 sm:py-16 md:py-20">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -637,13 +637,13 @@ const Partners = () => {
               <h2 className="text-4xl font-bold text-gray-800 mb-6">
                 Partenaires de Soutien
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Ces organisations contribuent à nos projets spéciaux et enrichissent notre programmation.
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {supportingPartners.map((partner, index) => (
+              {supportingPartners && supportingPartners.length > 0 ? supportingPartners.map((partner, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
@@ -663,13 +663,13 @@ const Partners = () => {
                     {partner.type}
                   </div>
                 </motion.div>
-              ))}
+              )) : <p>Aucun partenaire de soutien disponible.</p>}
             </div>
           </div>
         </section>
 
         {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
           <div className="container mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -679,7 +679,7 @@ const Partners = () => {
               <h2 className="text-4xl font-bold mb-6">
                 Devenez notre partenaire
               </h2>
-              <p className="text-xl mb-8 max-w-3xl mx-auto">
+              <p className="text-lg mb-8 max-w-3xl mx-auto">
                 Rejoignez notre réseau de partenaires et contribuez au développement de la radio communautaire de Banka.
               </p>
               <a
@@ -723,7 +723,7 @@ const Partners = () => {
                       </div>
                       <div>
                         <h2 className="text-3xl font-bold mb-1">{selectedPartner.name}</h2>
-                        <p className="text-xl opacity-90">{selectedPartner.fullName}</p>
+                        <p className="text-lg opacity-90">{selectedPartner.fullName}</p>
                         <div className="flex items-center space-x-2 mt-2">
                           <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
                             {selectedPartner.type}

@@ -31,7 +31,7 @@ const Programs = () => {
       id: 2,
       title: 'Journal Parlé',
       time: '12:00 - 13:00',
-      description: 'L\'actualité locale, nationale et internationale commentée par nos journalistes',
+      description: "L'actualité locale, nationale et internationale commentée par nos journalistes",
       icon: Newspaper,
       color: 'from-blue-400 to-indigo-500',
       bgColor: 'from-blue-50 to-indigo-50'
@@ -56,15 +56,6 @@ const Programs = () => {
     },
     {
       id: 5,
-      title: 'Dédicaces',
-      time: '20:00 - 22:00',
-      description: 'Vos messages d\'amour et dédicaces musicales pour vos proches',
-      icon: Heart,
-      color: 'from-pink-400 to-rose-500',
-      bgColor: 'from-pink-50 to-rose-50'
-    },
-    {
-      id: 6,
       title: 'Nuit Musicale',
       time: '22:00 - 06:00',
       description: 'Musiques douces et mélodies apaisantes pour accompagner vos nuits',
@@ -83,18 +74,10 @@ const Programs = () => {
     if (currentHour >= 15 && currentHour < 17) return programs[2];
     if (currentHour >= 18 && currentHour < 19) return programs[3];
     if (currentHour >= 20 && currentHour < 22) return programs[4];
-    return programs[5];
+    return programs[0]; // fallback to first program
   };
   
   const currentProgram = getCurrentProgram();
-  
-  const openDedicaceForm = () => {
-    window.open(
-      'https://docs.google.com/forms/d/e/1FAIpQLSdDedicaces_Form_ID/viewform',
-      '_blank',
-      'width=600,height=800'
-    );
-  };
   
   return (
     <section id="programmes" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50" ref={ref}>
@@ -178,24 +161,6 @@ const Programs = () => {
           ))}
         </div>
         
-        {/* Bouton dédicaces */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="text-center mt-12"
-        >
-          <button
-            onClick={openDedicaceForm}
-            className="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center space-x-3 mx-auto hover:shadow-2xl transition-all duration-300 hover:scale-105"
-          >
-            <Send size={24} />
-            <span>Envoyer une dédicace</span>
-          </button>
-          <p className="text-gray-600 mt-4">
-            Partagez vos messages d'amour avec vos proches
-          </p>
-        </motion.div>
       </div>
     </section>
   );

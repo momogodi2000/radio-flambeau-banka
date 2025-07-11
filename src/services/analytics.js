@@ -95,10 +95,6 @@ class AnalyticsService {
   trackNewsletterSubscribe() {
     this.trackEvent('newsletter_subscribe', 'Engagement', 'Newsletter');
   }
-  
-  trackDedicaceSubmit() {
-    this.trackEvent('dedicace_submit', 'Engagement', 'Dedicace');
-  }
 }
 
 export const analytics = new AnalyticsService();
@@ -125,7 +121,6 @@ export const STREAM_URLS = [
 
 export const GOOGLE_FORMS = {
   contact: 'https://forms.gle/contact_form_id',
-  dedicaces: 'https://forms.gle/dedicaces_form_id',
   newsletter: 'https://forms.gle/newsletter_form_id',
   feedback: 'https://forms.gle/feedback_form_id'
 };
@@ -170,14 +165,6 @@ export const PROGRAMS_SCHEDULE = [
     description: 'Discussions sur les enjeux sociétaux',
     host: 'Célestine ATANGANA',
     days: ['lundi', 'mercredi', 'vendredi']
-  },
-  {
-    id: 5,
-    name: 'Dédicaces',
-    time: '20:00 - 22:00',
-    description: 'Vos messages et dédicaces',
-    host: 'Équipe Radio',
-    days: ['tous']
   },
   {
     id: 6,

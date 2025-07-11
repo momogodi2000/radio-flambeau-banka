@@ -120,19 +120,6 @@ const Programs = () => {
     },
     {
       id: 8,
-      title: 'Dédicaces du Cœur',
-      host: 'Équipe Radio',
-      time: '20:00 - 22:00',
-      category: 'divertissement',
-      days: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
-      description: 'Vos messages d\'amour et dédicaces musicales pour vos proches.',
-      image: '/images/programs/dedicaces.jpg',
-      color: '[--tw-gradient-from:#ef4444] [--tw-gradient-to:#f97316]',
-      duration: '2h',
-      type: 'live'
-    },
-    {
-      id: 9,
       title: 'Nuit Musicale',
       host: 'Programmation automatique',
       time: '22:00 - 06:00',
@@ -170,9 +157,9 @@ const Programs = () => {
       
       <div className="min-h-screen bg-white dark:bg-gray-900" ref={ref}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br [--tw-gradient-from:#2563eb] [--tw-gradient-via:#9333ea] [--tw-gradient-to:#db2777] text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
+        <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-800">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -375,7 +362,7 @@ const Programs = () => {
                   { time: '12:00', programs: ['Journal', 'Journal', 'Journal', 'Journal', 'Journal', 'Journal', 'Journal'] },
                   { time: '15:00', programs: ['Variétés', 'Variétés', 'Variétés', 'Variétés', 'Variétés', 'Variétés', 'Variétés'] },
                   { time: '18:00', programs: ['Débat', 'Musique', 'Débat', 'Musique', 'Débat', 'Culture', 'Musique'] },
-                  { time: '20:00', programs: ['Dédicaces', 'Dédicaces', 'Dédicaces', 'Dédicaces', 'Dédicaces', 'Dédicaces', 'Dédicaces'] }
+                  { time: '20:00', programs: ['Nuit Musicale', 'Nuit Musicale', 'Nuit Musicale', 'Nuit Musicale', 'Nuit Musicale', 'Nuit Musicale', 'Nuit Musicale'] }
                 ].map((slot, index) => (
                   <div key={index} className="grid grid-cols-8 gap-4 mb-2">
                     <div className="font-medium text-gray-600">{slot.time}</div>
@@ -404,14 +391,7 @@ const Programs = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Participez à nos émissions
               </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto">
-                Envoyez vos dédicaces, participez aux débats et partagez vos histoires
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
-                  <Heart size={20} />
-                  <span>Envoyer une dédicace</span>
-                </button>
                 <button className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors flex items-center space-x-2">
                   <MessageCircle size={20} />
                   <span>Nous contacter</span>

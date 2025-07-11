@@ -8,7 +8,6 @@ const useGoogleForms = () => {
   
   const forms = {
     contact: import.meta.env.VITE_GOOGLE_FORMS_CONTACT,
-    dedicaces: import.meta.env.VITE_GOOGLE_FORMS_DEDICACES,
     newsletter: import.meta.env.VITE_GOOGLE_FORMS_NEWSLETTER
   };
   

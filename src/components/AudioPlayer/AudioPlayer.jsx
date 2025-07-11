@@ -129,7 +129,6 @@ const AudioPlayer = ({ isSticky = false, onClose }) => {
         'Actualités - Radio Flambeau-Banka',
         'Émission Culturelle - Débat',
         'Musique Traditionnelle',
-        'Dédicaces - Messages d\'auditeurs'
       ];
       
       const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];

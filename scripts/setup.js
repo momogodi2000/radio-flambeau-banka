@@ -36,7 +36,6 @@ VITE_LISTEN2MYRADIO_CONTROL=https://newl2mr.listen2myradio.com/control-panel
 
 # Google Forms (remplacez par vos vrais IDs)
 VITE_GOOGLE_FORMS_CONTACT=https://forms.gle/YOUR_CONTACT_FORM_ID
-VITE_GOOGLE_FORMS_DEDICACES=https://forms.gle/YOUR_DEDICACES_FORM_ID
 VITE_GOOGLE_FORMS_NEWSLETTER=https://forms.gle/YOUR_NEWSLETTER_FORM_ID
 
 # Google Analytics
