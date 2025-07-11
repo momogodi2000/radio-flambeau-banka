@@ -1,31 +1,19 @@
 // src/components/Header/Navigation.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { 
-  Home, 
-  Users, 
-  Calendar, 
-  Phone,
-  Camera,
-  Building2,
-  Newspaper,
-  Info
-} from 'lucide-react';
 
-const Navigation = ({ isScrolled = false, className = '' }) => {
+const Navigation = () => {
   const location = useLocation();
 
-  // Navigation items with icons
   const navigationItems = [
-    { name: 'Accueil', path: '/', icon: Home },
-    { name: 'À propos', path: '/about', icon: Info },
-    { name: 'Programmes', path: '/programs', icon: Calendar },
-    { name: 'Équipe', path: '/team', icon: Users },
-    { name: 'Actualités', path: '/news', icon: Newspaper },
-    { name: 'Galerie', path: '/gallery', icon: Camera },
-    { name: 'Partenaires', path: '/partners', icon: Building2 },
-    { name: 'Contact', path: '/contact', icon: Phone }
+    { name: 'Accueil', path: '/' },
+    { name: 'À propos', path: '/about' },
+    { name: 'Programmes', path: '/programs' },
+    { name: 'Équipe', path: '/team' },
+    { name: 'Actualités', path: '/news' },
+    { name: 'Galerie', path: '/gallery' },
+    { name: 'Partenaires', path: '/partners' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const isActivePath = (path) => {
@@ -36,28 +24,19 @@ const Navigation = ({ isScrolled = false, className = '' }) => {
   };
 
   return (
-    <nav className={`hidden lg:flex items-center space-x-1 ${className}`}>
-      {navigationItems.map((item, index) => (
-        <motion.div
+    <nav className="flex items-center space-x-1">
+      {navigationItems.map((item) => (
+        <Link
           key={item.path}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.05 }}
+          to={item.path}
+          className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+            isActivePath(item.path)
+              ? 'bg-blue-600 text-white shadow-lg'
+              : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
+          }`}
         >
-          <Link
-            to={item.path}
-            className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
-              isActivePath(item.path)
-                ? 'bg-blue-600 text-white shadow-lg'
-                : isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/20'
-            }`}
-          >
-            <item.icon size={16} />
-            <span>{item.name}</span>
-          </Link>
-        </motion.div>
+          {item.name}
+        </Link>
       ))}
     </nav>
   );

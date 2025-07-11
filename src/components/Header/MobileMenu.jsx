@@ -2,27 +2,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X,
-  Home, 
-  Users, 
-  Calendar, 
-  Phone,
-  Camera,
-  Building2,
-  Newspaper,
-  Info,
-  MessageCircle,
-  Download,
-  Wifi,
-  WifiOff,
-  LogIn
-} from 'lucide-react';
+import { X, Home, Info, Calendar, Users, Newspaper, Camera, Building2, Phone } from 'lucide-react';
 
-const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onLoginClick }) => {
+const MobileMenu = ({ isOpen, onClose }) => {
   const location = useLocation();
 
-  // Navigation items with icons
   const navigationItems = [
     { name: 'Accueil', path: '/', icon: Home },
     { name: 'À propos', path: '/about', icon: Info },
@@ -31,22 +15,7 @@ const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onL
     { name: 'Actualités', path: '/news', icon: Newspaper },
     { name: 'Galerie', path: '/gallery', icon: Camera },
     { name: 'Partenaires', path: '/partners', icon: Building2 },
-    { name: 'Contact', path: '/contact', icon: Phone }
-  ];
-
-  const contactActions = [
-    {
-      label: 'WhatsApp',
-      icon: MessageCircle,
-      action: () => window.open(`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`, '_blank'),
-      color: 'bg-green-500 hover:bg-green-600'
-    },
-    {
-      label: 'Email',
-      icon: Phone,
-      action: () => window.open(`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`, '_blank'),
-      color: 'bg-blue-500 hover:bg-blue-600'
-    }
+    { name: 'Contact', path: '/contact', icon: Phone },
   ];
 
   const isActivePath = (path) => {
@@ -56,26 +25,12 @@ const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onL
     return location.pathname.startsWith(path);
   };
 
-  // Close menu on escape key
+  // Close menu on route change
   React.useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+      onClose();
     }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, onClose]);
+  }, [location, isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -99,7 +54,7 @@ const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onL
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className="absolute right-0 top-0 h-full w-80 max-w-[90vw] bg-white shadow-2xl"
+            className="absolute right-0 top-0 h-full w-80 max-w-[90vw] bg-white dark:bg-gray-900 shadow-2xl"
           >
             {/* Menu Header */}
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
@@ -113,12 +68,8 @@ const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onL
                 </button>
               </div>
               
-              {/* Online Status */}
-              <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-sm ${
-                isOnline ? 'bg-green-500/20' : 'bg-red-500/20'
-              }`}>
-                {isOnline ? <Wifi size={14} /> : <WifiOff size={14} />}
-                <span>{isOnline ? 'Connecté' : 'Hors ligne'}</span>
+              <div className="text-sm opacity-90">
+                Radio Flambeau-Banka
               </div>
             </div>
 
@@ -134,11 +85,10 @@ const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onL
                   >
                     <Link
                       to={item.path}
-                      onClick={onClose}
                       className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 ${
                         isActivePath(item.path)
                           ? 'bg-blue-600 text-white shadow-lg'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
                       }`}
                     >
                       <item.icon size={20} />
@@ -149,47 +99,30 @@ const MobileMenu = ({ isOpen, onClose, isOnline, canInstall, onInstallClick, onL
               </nav>
 
               {/* Quick Actions */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
                   Contact Rapide
                 </h3>
                 <div className="space-y-3">
-                  {contactActions.map((action, index) => (
-                    <button
-                      key={index}
-                      onClick={action.action}
-                      className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 ${action.color} text-white`}
-                    >
-                      <action.icon size={20} />
-                      <span className="font-medium">{action.label}</span>
-                    </button>
-                  ))}
+                  <a
+                    href="https://wa.me/237696044661"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-3 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                  >
+                    <Phone size={20} />
+                    <span className="font-medium">WhatsApp</span>
+                  </a>
+                  
+                  <a
+                    href="mailto:contact@radioflambeaubanka.com"
+                    className="flex items-center space-x-3 p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                  >
+                    <Phone size={20} />
+                    <span className="font-medium">Email</span>
+                  </a>
                 </div>
               </div>
-
-                              {/* PWA Install */}
-                {canInstall && (
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <button
-                      onClick={onInstallClick}
-                      className="w-full flex items-center space-x-3 p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all duration-300"
-                    >
-                      <Download size={20} />
-                      <span className="font-medium">Installer l'App</span>
-                    </button>
-                  </div>
-                )}
-
-                {/* Admin Login */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <button
-                    onClick={onLoginClick}
-                    className="w-full flex items-center space-x-3 p-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:shadow-lg transition-all duration-300"
-                  >
-                    <LogIn size={20} />
-                    <span className="font-medium">Panneau d'Administration</span>
-                  </button>
-                </div>
             </div>
           </motion.div>
         </motion.div>
