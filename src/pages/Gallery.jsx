@@ -32,8 +32,23 @@ import {
   Sparkles
 } from 'lucide-react';
 
+// Import all available images from public folder
 import bafang from '../../public/images/bafang.jpg';
 import protege from '../../public/images/protege.jpg';
+import qv1 from '../../public/images/qv1.jpg';
+import flyer from '../../public/images/flyer.png';
+import heroBg from '../../public/images/hero-bg.jpg';
+import logo from '../../public/images/logo.png';
+
+// Import program images
+import morningProgram from '../../public/images/programs/morning.jpg';
+import musicProgram from '../../public/images/programs/music.jpg';
+import newsProgram from '../../public/images/programs/news.jpg';
+
+// Import team images
+import paul from '../../public/images/team/paul.jpg';
+import marie from '../../public/images/team/marie.jpg';
+import jeanPaul from '../../public/images/team/jean-paul.jpg';
 
 
 const Gallery = () => {
@@ -62,8 +77,8 @@ const Gallery = () => {
       type: 'video',
       date: '2025-04-23',
       location: 'Studio Radio Flambeau-Banka',
-      image: bafang,
-      thumbnail: '/images/gallery/thumbnails/voix-femmes-launch-thumb.jpg',
+      image: bafang, // Using imported image
+      thumbnail: '/images/bafang.jpg', // Using public URL path
       links: {
         youtube: 'https://www.youtube.com/watch?v=DSrdKNCNMBM',
         facebook: 'https://facebook.com/radioflambeaubanka/posts/voix-femmes-launch',
@@ -83,8 +98,8 @@ const Gallery = () => {
       date: '2025-04-23',
       time: '18:00',
       location: '91.5 MHz - Haut-Nkam',
-      image: bafang,
-      thumbnail: '/images/gallery/thumbnails/first-broadcast-thumb.jpg',
+      image: qv1, // Using imported image
+      thumbnail: '/images/qv1.jpg', // Using public URL path
       links: {
         youtube: 'https://www.youtube.com/watch?v=DSrdKNCNMBM',
         facebook: 'https://facebook.com/radioflambeaubanka/videos/first-voix-femmes',
@@ -103,8 +118,8 @@ const Gallery = () => {
       type: 'gallery',
       date: '2025-01-15',
       location: 'Radio Flambeau-Banka',
-      image: protege,
-      thumbnail: '/images/gallery/thumbnails/studio-renovation-thumb.jpg',
+      image: protege, // Using imported image
+      thumbnail: '/images/protege.jpg', // Using public URL path
       links: {
         facebook: 'https://facebook.com/radioflambeaubanka/albums/studio-renovation',
         instagram: 'https://instagram.com/p/studio-renovation',
@@ -123,8 +138,8 @@ const Gallery = () => {
       date: '2025-06-15',
       time: 'Toute la journée',
       location: 'Place Publique de Banka',
-      image: '/images/gallery/cultural-festival-2025.jpg',
-      thumbnail: '/images/gallery/thumbnails/cultural-festival-2025-thumb.jpg',
+      image: flyer, // Using imported image
+      thumbnail: '/images/flyer.png', // Using public URL path
       links: {
         youtube: 'https://www.youtube.com/live/cultural-festival-banka-2025',
         facebook: 'https://facebook.com/radioflambeaubanka/live/cultural-festival',
@@ -143,8 +158,8 @@ const Gallery = () => {
       type: 'gallery',
       date: '2025-03-10',
       location: 'Centre de Formation PROTEGE QV',
-      image: '/images/gallery/training-session.jpg',
-      thumbnail: '/images/gallery/thumbnails/training-session-thumb.jpg',
+      image: morningProgram, // Using imported program image
+      thumbnail: '/images/programs/morning.jpg', // Using public URL path
       links: {
         facebook: 'https://facebook.com/radioflambeaubanka/posts/training-session',
         instagram: 'https://instagram.com/p/training-session',
@@ -162,8 +177,8 @@ const Gallery = () => {
       type: 'gallery',
       date: '2025-05-20',
       location: 'Studio Radio Flambeau-Banka',
-      image: '/images/gallery/behind-scenes.jpg',
-      thumbnail: '/images/gallery/thumbnails/behind-scenes-thumb.jpg',
+      image: musicProgram, // Using imported program image
+      thumbnail: '/images/programs/music.jpg', // Using public URL path
       links: {
         instagram: 'https://instagram.com/p/behind-scenes-daily',
         facebook: 'https://facebook.com/radioflambeaubanka/posts/behind-scenes',
@@ -182,7 +197,7 @@ const Gallery = () => {
       date: '2025-06-01',
       time: '20:00',
       location: 'Studio Radio Flambeau-Banka',
-      image: '/images/gallery/youth-special.jpg',
+      image: newsProgram, // Using imported program image
       thumbnail: '/images/gallery/thumbnails/youth-special-thumb.jpg',
       links: {
         youtube: 'https://www.youtube.com/watch?v=youth-special-banka',
@@ -558,47 +573,9 @@ const Gallery = () => {
                       }`}>
                         {item.title}
                       </h3>
-                      
-                      <p className={`text-gray-600 mb-3 ${
-                        viewMode === 'list' ? 'line-clamp-2' : 'line-clamp-3'
-                      }`}>
+                      <p className="text-gray-600 mb-4 line-clamp-2">
                         {item.description}
                       </p>
-                      
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {item.tags.slice(0, viewMode === 'list' ? 2 : 3).map((tag, tagIndex) => (
-                          <span key={tagIndex} className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex space-x-1">
-                          {item.links.youtube && (
-                            <a href={item.links.youtube} target="_blank" rel="noopener noreferrer" 
-                               onClick={(e) => e.stopPropagation()}
-                               className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors">
-                              <Youtube size={10} />
-                            </a>
-                          )}
-                          {item.links.facebook && (
-                            <a href={item.links.facebook} target="_blank" rel="noopener noreferrer"
-                               onClick={(e) => e.stopPropagation()}
-                               className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
-                              <Facebook size={10} />
-                            </a>
-                          )}
-                          {item.links.instagram && (
-                            <a href={item.links.instagram} target="_blank" rel="noopener noreferrer"
-                               onClick={(e) => e.stopPropagation()}
-                               className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center text-white hover:bg-pink-600 transition-colors">
-                              <Instagram size={10} />
-                            </a>
-                          )}
-                        </div>
-                        <ExternalLink size={16} className="text-gray-400 group-hover:text-purple-600 transition-colors" />
-                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -606,174 +583,7 @@ const Gallery = () => {
             </AnimatePresence>
           </div>
         </section>
-
-        {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl font-bold mb-6">
-                Partagez vos moments
-              </h2>
-              <p className="text-xl mb-8 max-w-3xl mx-auto">
-                Vous avez des photos ou vidéos de nos événements ? Partagez-les avec nous !
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a
-                  href="mailto:radoiflambeaubanka@gmail.com?subject=Partage de contenu"
-                  className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2"
-                >
-                  <Camera size={20} />
-                  <span>Envoyer vos photos</span>
-                </a>
-                <a
-                  href="https://wa.me/237696044661"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-colors flex items-center space-x-2"
-                >
-                  <Share2 size={20} />
-                  <span>WhatsApp</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
       </div>
-
-      {/* Item Detail Modal */}
-      {selectedItem && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedItem(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative">
-              <img 
-                src={selectedItem.image} 
-                alt={selectedItem.title}
-                className="w-full h-64 md:h-80 object-cover"
-              />
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <div className="p-8">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedItem.title}</h2>
-                  <div className="flex items-center space-x-4 text-gray-600">
-                    <div className="flex items-center space-x-1">
-                      <Calendar size={16} />
-                      <span>{formatDate(selectedItem.date)}</span>
-                    </div>
-                    {selectedItem.time && (
-                      <div className="flex items-center space-x-1">
-                        <Clock size={16} />
-                        <span>{selectedItem.time}</span>
-                      </div>
-                    )}
-                    {selectedItem.location && (
-                      <div className="flex items-center space-x-1">
-                        <MapPin size={16} />
-                        <span>{selectedItem.location}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="flex space-x-2">
-                  {Object.entries(selectedItem.links).map(([platform, url]) => {
-                    const icons = {
-                      youtube: Youtube,
-                      facebook: Facebook,
-                      instagram: Instagram,
-                      twitter: Twitter
-                    };
-                    const colors = {
-                      youtube: 'bg-red-500 hover:bg-red-600',
-                      facebook: 'bg-blue-600 hover:bg-blue-700',
-                      instagram: 'bg-pink-500 hover:bg-pink-600',
-                      twitter: 'bg-sky-500 hover:bg-sky-600'
-                    };
-                    const Icon = icons[platform];
-                    
-                    return Icon ? (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`w-10 h-10 ${colors[platform]} rounded-full flex items-center justify-center text-white transition-colors`}
-                      >
-                        <Icon size={20} />
-                      </a>
-                    ) : null;
-                  })}
-                </div>
-              </div>
-              
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                {selectedItem.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mb-6">
-                {selectedItem.tags.map((tag, index) => (
-                  <span key={index} className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              
-              {!selectedItem.upcoming && (
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-3 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-gray-800">{selectedItem.stats.views}</div>
-                    <div className="text-sm text-gray-600">Vues</div>
-                  </div>
-                  <div className="text-center p-3 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-gray-800">{selectedItem.stats.likes}</div>
-                    <div className="text-sm text-gray-600">J'aime</div>
-                  </div>
-                  <div className="text-center p-3 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-gray-800">{selectedItem.stats.shares}</div>
-                    <div className="text-sm text-gray-600">Partages</div>
-                  </div>
-                </div>
-              )}
-              
-              {selectedItem.participants && (
-                <div className="mb-6">
-                  <h4 className="font-semibold text-gray-800 mb-2">Participants :</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedItem.participants.map((participant, index) => (
-                      <span key={index} className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-sm">
-                        {participant}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
     </>
   );
 };
