@@ -26,11 +26,11 @@ const MobileMenu = ({ isOpen, onClose }) => {
   };
 
   // Close menu on route change
-  React.useEffect(() => {
-    if (isOpen) {
-      onClose();
-    }
-  }, [location, isOpen, onClose]);
+  // React.useEffect(() => {
+  //   if (isOpen) {
+  //     onClose();
+  //   }
+  // }, [location, isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -85,6 +85,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   >
                     <Link
                       to={item.path}
+                      onClick={onClose}
                       className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 ${
                         isActivePath(item.path)
                           ? 'bg-blue-600 text-white shadow-lg'
