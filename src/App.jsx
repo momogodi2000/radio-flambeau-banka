@@ -15,7 +15,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import AudioPlayer from './components/AudioPlayer/AudioPlayer';
 import LoadingSpinner from './components/Common/LoadingSpinner';
-import ErrorBoundary from './components/Common/ErrorBoundary';
+import ErrorBoundary from './components/Common/ErrorBoundary.jsx';
 import OfflineIndicator from './components/Common/OfflineIndicator';
 import PWAInstallPrompt from './components/PWA/PWAInstallPrompt';
 import UpdateAvailable from './components/PWA/UpdateAvailable';
