@@ -1,7 +1,7 @@
 // src/components/Sections/Hero.jsx
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, Info, Users, Radio, Globe } from 'lucide-react';
+import { Play, Pause, Info, Users, Radio, Globe, LogIn } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const Hero = ({ onPlayClick, isPlaying }) => {
@@ -33,6 +33,10 @@ const Hero = ({ onPlayClick, isPlaying }) => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+  
+  const handleLoginClick = () => {
+    window.open('https://newl2mr.listen2myradio.com/control-panel', '_blank');
   };
   
   return (
@@ -190,6 +194,17 @@ const Hero = ({ onPlayClick, isPlaying }) => {
               >
                 <Info size={24} />
                 <span>Découvrir</span>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleLoginClick}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 rounded-full font-semibold text-lg flex items-center space-x-3 shadow-2xl hover:shadow-3xl transition-all duration-300"
+                title="Accéder au panneau de contrôle"
+              >
+                <LogIn size={20} />
+                <span>Administration</span>
               </motion.button>
             </motion.div>
             

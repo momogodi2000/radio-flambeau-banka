@@ -267,7 +267,7 @@ const Footer = () => {
           {/* Technologie */}
           <div className="mt-6 text-center">
             <p className="text-gray-500 text-sm">
-              Développé avec React + Vite • Hébergé sur Netlify • Streaming par Listen2MyRadio
+              Développé Par Protege Qv Yaounde 
             </p>
           </div>
         </div>

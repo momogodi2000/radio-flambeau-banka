@@ -32,6 +32,10 @@ import {
   Sparkles
 } from 'lucide-react';
 
+import bafang from '../../public/images/bafang.jpg';
+import protege from '../../public/images/protege.jpg';
+
+
 const Gallery = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -58,7 +62,7 @@ const Gallery = () => {
       type: 'video',
       date: '2025-04-23',
       location: 'Studio Radio Flambeau-Banka',
-      image: '/images/gallery/voix-femmes-launch.jpg',
+      image: bafang,
       thumbnail: '/images/gallery/thumbnails/voix-femmes-launch-thumb.jpg',
       links: {
         youtube: 'https://www.youtube.com/watch?v=DSrdKNCNMBM',
@@ -79,7 +83,7 @@ const Gallery = () => {
       date: '2025-04-23',
       time: '18:00',
       location: '91.5 MHz - Haut-Nkam',
-      image: '/images/gallery/first-broadcast.jpg',
+      image: bafang,
       thumbnail: '/images/gallery/thumbnails/first-broadcast-thumb.jpg',
       links: {
         youtube: 'https://www.youtube.com/watch?v=DSrdKNCNMBM',
@@ -99,7 +103,7 @@ const Gallery = () => {
       type: 'gallery',
       date: '2025-01-15',
       location: 'Radio Flambeau-Banka',
-      image: '/images/gallery/studio-renovation.jpg',
+      image: protege,
       thumbnail: '/images/gallery/thumbnails/studio-renovation-thumb.jpg',
       links: {
         facebook: 'https://facebook.com/radioflambeaubanka/albums/studio-renovation',

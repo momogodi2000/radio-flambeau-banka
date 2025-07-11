@@ -11,14 +11,15 @@ import {
   Calendar, 
   Phone,
   Camera,
-  Handshake,
+  Building2,
   Newspaper,
   Info,
   Volume2,
   MessageCircle,
   Download,
   Wifi,
-  WifiOff
+  WifiOff,
+  LogIn
 } from 'lucide-react';
 import { useAudio } from '../../context/AudioContext';
 import { usePWA } from '../../context/PWAContext';
@@ -38,7 +39,7 @@ const Header = () => {
     { name: 'Équipe', path: '/team', icon: Users },
     { name: 'Actualités', path: '/news', icon: Newspaper },
     { name: 'Galerie', path: '/gallery', icon: Camera },
-    { name: 'Partenaires', path: '/partners', icon: Handshake },
+    { name: 'Partenaires', path: '/partners', icon: Building2 },
     { name: 'Contact', path: '/contact', icon: Phone }
   ];
 
@@ -86,6 +87,10 @@ const Header = () => {
     if (canInstall) {
       await installPWA();
     }
+  };
+
+  const handleLoginClick = () => {
+    window.open('https://newl2mr.listen2myradio.com/control-panel', '_blank');
   };
 
   const isActivePath = (path) => {
@@ -214,6 +219,20 @@ const Header = () => {
                 ))}
               </div>
 
+              {/* Login Button */}
+              <button
+                onClick={handleLoginClick}
+                className={`hidden md:flex items-center space-x-2 px-3 py-2 rounded-lg font-medium transition-all duration-300 ${
+                  isScrolled
+                    ? 'bg-green-600 text-white hover:bg-green-700'
+                    : 'bg-green-500/20 text-white hover:bg-green-500/30'
+                }`}
+                title="Accéder au panneau de contrôle"
+              >
+                <LogIn size={16} />
+                <span className="hidden lg:inline">Admin</span>
+              </button>
+
               {/* Mobile Menu Button */}
               <button
                 onClick={handleMenuToggle}
@@ -332,6 +351,17 @@ const Header = () => {
                     </button>
                   </div>
                 )}
+
+                {/* Admin Login */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <button
+                    onClick={handleLoginClick}
+                    className="w-full flex items-center space-x-3 p-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:shadow-lg transition-all duration-300"
+                  >
+                    <LogIn size={20} />
+                    <span className="font-medium">Panneau d'Administration</span>
+                  </button>
+                </div>
               </div>
             </motion.div>
           </motion.div>

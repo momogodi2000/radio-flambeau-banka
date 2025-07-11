@@ -3,6 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Test styles to ensure CSS is loading */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Fallback styles in case Tailwind doesn't load */
+.fallback-test {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
 /* Variables CSS personnalisées */
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
