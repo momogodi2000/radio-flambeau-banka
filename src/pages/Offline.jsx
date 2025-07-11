@@ -194,7 +194,7 @@ const Offline = () => {
               </div>
             )}
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
                 <div className="text-2xl font-bold text-blue-600">{contentSummary.pages}</div>
                 <div className="text-sm text-gray-600">Pages en cache</div>
@@ -293,7 +293,7 @@ const Offline = () => {
           >
             <button
               onClick={goHome}
-              className="bg-white text-gray-800 px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2 mx-auto"
+              className="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold text-lg mt-2 hover:bg-blue-700 transition-colors"
             >
               <Home size={20} />
               <span>Retour à l'accueil</span>

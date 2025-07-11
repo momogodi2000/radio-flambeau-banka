@@ -270,7 +270,11 @@ const Contact = () => {
                   Envoyez-nous un message
                 </h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                  style={{ minWidth: 0 }}
+                >
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">

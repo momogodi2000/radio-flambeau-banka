@@ -289,19 +289,17 @@ const About = () => {
                       initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.6, delay: index * 0.2 }}
-                      className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                      className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                     >
-                      <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                      <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'} mb-4 md:mb-0`}>
                         <div className="bg-white rounded-2xl p-6 shadow-lg">
                           <div className="text-2xl font-bold text-blue-600 mb-2">{milestone.year}</div>
                           <h3 className="text-xl font-bold text-gray-800 mb-3">{milestone.title}</h3>
                           <p className="text-gray-600">{milestone.description}</p>
                         </div>
                       </div>
-                      
-                      <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full relative z-10 flex-shrink-0"></div>
-                      
-                      <div className="w-1/2"></div>
+                      <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full relative z-10 flex-shrink-0 mb-4 md:mb-0"></div>
+                      <div className="w-full md:w-1/2"></div>
                     </motion.div>
                   ))
                 ) : (

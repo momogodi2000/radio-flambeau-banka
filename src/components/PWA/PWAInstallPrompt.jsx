@@ -5,7 +5,7 @@ import { Download, X, Smartphone, Monitor, Zap, Wifi } from 'lucide-react';
 import { usePWA } from '../../context/PWAContext';
 
 const PWAInstallPrompt = () => {
-  const { canInstall, installPWA, isInstalled } = usePWA();
+  const { canInstall, installPWA, isInstalled, deviceType, browser } = usePWA();
   const [showPrompt, setShowPrompt] = useState(false);
   const [isInstalling, setIsInstalling] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -143,21 +143,24 @@ const PWAInstallPrompt = () => {
               </div>
             </div>
 
-            {/* Device-specific instructions */}
-            {deviceInfo.isIOS && (
-              <div className="bg-blue-50 rounded-lg p-3 mb-4">
+            {/* Device-specific instructions and install button */}
+            {deviceType === 'ios' && !canInstall && !isInstalled && (
+              <div className="bg-blue-50 rounded-lg p-3 mb-4" role="alert" aria-live="polite">
                 <p className="text-sm text-blue-800">
-                  <strong>iOS :</strong> Appuyez sur le bouton de partage et sélectionnez "Ajouter à l'écran d'accueil"
+                  <strong>iOS :</strong> Pour installer l'application, appuyez sur <span aria-label="Partager" role="img">&#x1f5d2;</span> puis "Ajouter à l'écran d'accueil".<br/>
+                  <span className="block mt-2">Ouvrez dans Safari pour voir cette option.</span>
                 </p>
+                <div className="flex justify-center mt-2">
+                  <img src="/images/ios-add-to-home.png" alt="Guide iOS Ajouter à l'écran d'accueil" className="w-32 h-auto" />
+                </div>
               </div>
             )}
-
-            {/* Action buttons */}
-            <div className="flex space-x-3">
+            {deviceType === 'android' && browser === 'chrome' && canInstall && !isInstalled && (
               <button
                 onClick={handleInstall}
                 disabled={isInstalling}
                 className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                aria-label="Installer l'application"
               >
                 {isInstalling ? (
                   <>
@@ -171,6 +174,35 @@ const PWAInstallPrompt = () => {
                   </>
                 )}
               </button>
+            )}
+            {(deviceType === 'desktop' || !canInstall) && (
+              <p className="text-xs text-gray-500 mt-3 text-center" aria-live="polite">
+                L'installation de l'application est disponible sur mobile ou navigateur compatible PWA.
+              </p>
+            )}
+
+            {/* Action buttons */}
+            <div className="flex space-x-3">
+              {deviceType === 'android' && browser === 'chrome' && canInstall && !isInstalled && (
+                <button
+                  onClick={handleInstall}
+                  disabled={isInstalling}
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                  aria-label="Installer l'application"
+                >
+                  {isInstalling ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Installation...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download size={20} />
+                      <span>Installer maintenant</span>
+                    </>
+                  )}
+                </button>
+              )}
               
               <button
                 onClick={() => handleDismiss(true)}

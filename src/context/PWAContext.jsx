@@ -276,6 +276,25 @@ export const PWAProvider = ({ children }) => {
     }
   };
 
+  // Add device and browser detection
+  const getDeviceType = () => {
+    const ua = navigator.userAgent;
+    if (/iPad|iPhone|iPod/.test(ua)) return 'ios';
+    if (/Android/.test(ua)) return 'android';
+    if (/Windows|Macintosh|Linux/.test(ua) && !/Mobile/.test(ua)) return 'desktop';
+    return 'other';
+  };
+  const getBrowser = () => {
+    const ua = navigator.userAgent;
+    if (/Chrome/.test(ua) && /Google Inc/.test(navigator.vendor)) return 'chrome';
+    if (/Safari/.test(ua) && /Apple Computer/.test(navigator.vendor)) return 'safari';
+    if (/Firefox/.test(ua)) return 'firefox';
+    if (/Edg/.test(ua)) return 'edge';
+    return 'other';
+  };
+  const deviceType = getDeviceType();
+  const browser = getBrowser();
+
   const value = {
     // State
     canInstall,
@@ -284,6 +303,8 @@ export const PWAProvider = ({ children }) => {
     updateAvailable,
     cacheSize: formatCacheSize(cacheSize),
     rawCacheSize: cacheSize,
+    deviceType,
+    browser,
     
     // Functions
     installPWA,

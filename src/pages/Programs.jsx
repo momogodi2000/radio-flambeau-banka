@@ -239,7 +239,7 @@ const Programs = () => {
                 <p className="text-gray-600">Aucun programme trouvé pour ces critères.</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {filteredPrograms.map((program, index) => (
                   <motion.div
                     key={program.id}

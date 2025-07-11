@@ -342,7 +342,7 @@ const News = () => {
                 <p className="text-gray-600">Aucun article trouvé pour ces critères.</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {filteredNews.map((article, index) => (
                   <motion.article
                     key={article.id}
@@ -439,7 +439,7 @@ const News = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70 overflow-y-auto"
             onClick={() => setSelectedArticle(null)}
           >
             <motion.div
